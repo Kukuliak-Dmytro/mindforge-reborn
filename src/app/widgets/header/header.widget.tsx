@@ -13,8 +13,8 @@ export const HeaderComponent = () => {
   return (
     <header
       className={cn(
-        "w-full h-[80px] flex justify-center items-center",
-        "bg-gradient-to-t from-white-bg to-white-fg shadow-small",
+        "relative z-10 w-full h-[80px] flex justify-center items-center",
+        "bg-gradient-to-b from-white-bg to-white-fg shadow-small",
       )}>
       <div className="flex justify-between max-w-[1240px] w-full px-4">
         {/* Left side */}

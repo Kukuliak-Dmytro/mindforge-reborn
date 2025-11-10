@@ -1,2 +1,2 @@
-export { gothic } from "./gothic";
-export { franklin } from "./franklin";
+export { comfortaa } from "./comfortaa";
+export { quicksand } from "./quicksand";

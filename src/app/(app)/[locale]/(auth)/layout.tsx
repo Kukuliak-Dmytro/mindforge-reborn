@@ -1,4 +1,5 @@
 import { FC, ReactNode } from "react";
+import { AuthHeaderComponent } from "@/app/widgets/auth-header";
 
 //interface
 interface IProps {
@@ -9,13 +10,23 @@ interface IProps {
 /**
  * AuthLayout component for authentication pages.
  * This layout bypasses the parent LayoutModule (header/footer).
- * Just renders children directly.
+ * Includes auth header with logo, language switcher, and theme switcher.
+ * Handles centering and background for auth pages.
  */
 export const AuthLayout: FC<Readonly<IProps>> = (props) => {
   const { children } = props;
 
   //return
-  return <>{children}</>;
+  return (
+    <div className="min-h-screen flex flex-col bg-white-bg">
+      <AuthHeaderComponent />
+      <div
+        className="flex-1 flex items-center justify-center bg-gradient-to-br
+          from-white-bg via-white-fg to-white-bg">
+        {children}
+      </div>
+    </div>
+  );
 };
 
 export default AuthLayout;

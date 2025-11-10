@@ -1,1 +1,1 @@
-export { PageContainer } from "./page-container";
+export { Section, SectionInvisible } from "./section";

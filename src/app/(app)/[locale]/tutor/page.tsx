@@ -1,21 +1,18 @@
 import { Locale, hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
+import { setRequestLocale, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
-
-import { HomeModule } from "@/app/modules/home";
-import { PageContainer } from "@/app/shared/components/containers";
 import { routing } from "@/pkg/libraries/locale/routing";
 
 //interface
 interface IProps {
   params: Promise<{ locale: Locale }>;
 }
-export const revalidate = 30;
+
 //component
 /**
- * Home page component.
+ * Tutor page component.
  */
-export const Home = async (props: IProps) => {
+export const TutorPage = async (props: IProps) => {
   const { locale } = await props.params;
 
   // Validate locale
@@ -26,12 +23,17 @@ export const Home = async (props: IProps) => {
   // Enable static rendering
   setRequestLocale(locale);
 
+  const t = await getTranslations();
+
   //return
   return (
-    <PageContainer>
-      <HomeModule />
-    </PageContainer>
+    <div className="flex min-h-screen items-center justify-center p-8">
+      <h1 className="text-4xl font-bold text-rich-black">
+        {t("tutor_title")}
+      </h1>
+    </div>
   );
 };
 
-export default Home;
+export default TutorPage;
+

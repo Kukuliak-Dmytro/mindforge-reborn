@@ -56,17 +56,34 @@ export const proxy = async (request: NextRequest) => {
     return intlMiddleware(request);
   }
 
+  // Convert NextRequest headers to Headers object for the auth API
+  const headers = new Headers();
+  request.headers.forEach((value, key) => {
+    headers.set(key, value);
+  });
+
+  // Debug: Log cookie header
+  const cookieHeader = headers.get("cookie");
+  if (cookieHeader) {
+    console.log("Cookies being forwarded:", cookieHeader.substring(0, 100));
+  } else {
+    console.log("No cookies found in request headers");
+  }
+
   const session = await auth.api.getSession({
-    headers: request.headers,
+    headers,
   });
 
   if (!session) {
+    console.log("No session found, redirecting to login");
     // Extract locale and redirect to locale-aware login page
     const locale = getLocaleFromRequest(request);
     const loginPath =
       locale === routing.defaultLocale ? "/login" : `/${locale}/login`;
     return NextResponse.redirect(new URL(loginPath, request.url));
   }
+
+  console.log("Session found, user ID:", session.user.id);
 
   // Handle internationalization routing
   const response = intlMiddleware(request);

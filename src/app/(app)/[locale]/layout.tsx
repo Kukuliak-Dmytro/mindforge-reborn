@@ -4,15 +4,15 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { FC, ReactNode } from "react";
 
-import { gothic, franklin } from "@/config/fonts";
 import "@/config/styles/globals.css";
-import { AuthLayoutWrapper } from "@/app/modules/layout/auth-layout-wrapper.component";
+import { LayoutModule } from "@/app/modules/layout/layout.module";
 import { ScanComponent } from "@/pkg/libraries/scan/scan.component";
 import { envServer } from "@/config/env";
 import { RestApiProvider } from "@/pkg/libraries/rest-api/provider";
 import { UiProvider } from "@/pkg/libraries/ui";
 import { routing } from "@/pkg/libraries/locale/routing";
 import { IntegrationsProvider } from "@/pkg/integrations/integrations.provider";
+import { comfortaa, quicksand } from "@/config/fonts";
 
 //interface
 interface IProps {
@@ -66,15 +66,16 @@ export const RootLayout: FC<Readonly<IProps>> = async (props) => {
 
   //return
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${comfortaa.variable} ${quicksand.variable}`}>
       <ScanComponent isDev={envServer.NODE_ENV !== "production"} />
-      <body className={`${gothic.className} ${franklin.className} antialiased`}>
+      <body className={`antialiased ${comfortaa.className}`}>
         <IntegrationsProvider />
         <RestApiProvider>
           <UiProvider>
-            <NextIntlClientProvider>
-              <AuthLayoutWrapper>{children}</AuthLayoutWrapper>
-            </NextIntlClientProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
           </UiProvider>
         </RestApiProvider>
       </body>

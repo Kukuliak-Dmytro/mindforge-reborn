@@ -28,10 +28,11 @@ export const signIn = async (
 
 //function
 /**
- * Signs up a new user with name, email, and password.
+ * Signs up a new user with firstName, lastName, email, and password.
  */
 export const signUp = async (
-  name: string,
+  firstName: string,
+  lastName: string,
   email: string,
   password: string,
   locale?: string,
@@ -39,11 +40,18 @@ export const signUp = async (
   // Always include locale in callback URL to preserve locale context
   const callbackURL = locale ? `/${locale}` : "/";
 
+  // Type assertion needed because TypeScript types don't include additionalFields
+  // Better Auth accepts firstName and lastName as additionalFields with input: true
+  // We don't send 'name' because our Prisma schema uses firstName and lastName instead
   const { data, error } = await authClient.signUp.email({
     email,
     password,
-    name,
+    firstName,
+    lastName,
     callbackURL,
+  } as unknown as Parameters<typeof authClient.signUp.email>[0] & {
+    firstName: string;
+    lastName: string;
   });
 
   if (error) {

@@ -15,7 +15,7 @@
   --color-rich-black: var(--color-rich-black);
   --color-dark-gray: var(--color-dark-gray);
 
-  /* Shadows */
+  /* Shadows - defined in variables.css with light/dark variants */
   --shadow-small: var(--shadow-small);
   --shadow-medium: var(--shadow-medium);
   --shadow-double: var(--shadow-double);
@@ -24,22 +24,19 @@
   --radius-small: var(--smallBorder);
   --radius-medium: var(--mediumBorder);
   --radius-large: var(--largeBorder);
-
-  /* Fonts */
-  --font-sans:
-    var(--font-montserrat-alternates), "Montserrat Alternates", sans-serif;
 }
 
 /* Base styles */
 * {
   box-sizing: border-box;
-  font-family: var(--font-sans);
 }
 
 body {
   min-height: 100vh;
   background-color: var(--color-white-bg);
   color: var(--color-rich-black);
+  font-family:
+    var(--font-comfortaa), var(--font-quicksand), system-ui, sans-serif;
 }
 
 /* Typography */

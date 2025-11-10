@@ -32,12 +32,16 @@
   "auth_or": "Or",
   "auth_register_title": "Register",
   "auth_register_description": "Create a new account",
-  "auth_register_label_name": "Name",
-  "auth_register_placeholder_name": "Name",
+  "auth_register_label_firstName": "First Name",
+  "auth_register_placeholder_firstName": "First Name",
+  "auth_register_label_lastName": "Last Name",
+  "auth_register_placeholder_lastName": "Last Name",
   "auth_register_label_email": "Email",
   "auth_register_placeholder_email": "Email",
   "auth_register_label_password": "Password",
   "auth_register_placeholder_password": "Password",
+  "auth_register_label_confirmPassword": "Confirm Password",
+  "auth_register_placeholder_confirmPassword": "Confirm Password",
   "auth_register_button": "Register",
   "auth_register_button_loading": "Creating account...",
   "auth_register_error": "Register failed",
@@ -71,5 +75,7 @@
       "maxLength": "Search query must be 100 characters or less",
       "invalidCharacters": "Search query contains invalid characters"
     }
-  }
+  },
+  "student_title": "Student",
+  "tutor_title": "Tutor"
 }

@@ -6,6 +6,7 @@ import { Link } from "@/pkg/libraries/locale";
 import { cn } from "@/app/shared/utils/utils";
 import { Button } from "@/app/shared/components/ui/button";
 import * as Sentry from "@sentry/nextjs";
+import { authClient } from "@/pkg/libraries/better-auth/auth-client";
 
 //component
 /**
@@ -15,6 +16,7 @@ export const HomeModule = () => {
   const t = useTranslations();
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
+  const { data: session } = authClient.useSession();
 
   // Test server-side error via API endpoint
   const handleTestServerError = async () => {
@@ -57,18 +59,68 @@ export const HomeModule = () => {
 
   //return
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">{t("home_welcome")}</h1>
-        <p className="mb-6 text-muted-foreground">{t("home_description")}</p>
+    <div className="flex min-h-screen items-center justify-center p-8">
+      <div className="text-center max-w-2xl w-full space-y-6">
+        <h1 className="mb-4 text-4xl font-bold text-rich-black">
+          {t("home_welcome")}
+        </h1>
+        <p className="mb-6 text-dark-gray">{t("home_description")}</p>
+
+        {/* Display session information */}
+        {session && (
+          <div
+            className="bg-white-fg rounded-medium p-6 shadow-double border
+              border-primary/20">
+            <h2 className="text-2xl font-semibold text-rich-black mb-4">
+              Session Information
+            </h2>
+            <div className="space-y-2 text-left">
+              <div className="flex justify-between">
+                <span className="font-medium text-dark-gray">User ID:</span>
+                <span className="text-rich-black">{session.user.id}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="font-medium text-dark-gray">Email:</span>
+                <span className="text-rich-black">{session.user.email}</span>
+              </div>
+              {session.user.firstName && (
+                <div className="flex justify-between">
+                  <span className="font-medium text-dark-gray">
+                    First Name:
+                  </span>
+                  <span className="text-rich-black">
+                    {session.user.firstName}
+                  </span>
+                </div>
+              )}
+              {session.user.lastName && (
+                <div className="flex justify-between">
+                  <span className="font-medium text-dark-gray">Last Name:</span>
+                  <span className="text-rich-black">
+                    {session.user.lastName}
+                  </span>
+                </div>
+              )}
+              <div className="flex justify-between">
+                <span className="font-medium text-dark-gray">
+                  Email Verified:
+                </span>
+                <span className="text-rich-black">
+                  {session.user.emailVerified ? "Yes" : "No"}
+                </span>
+              </div>
+            </div>
+          </div>
+        )}
+
         <div className="flex flex-col gap-4 items-center">
           <Link
             href="/posts"
             locale={locale}
             className={cn(
               "inline-flex items-center justify-center rounded-md",
-              "bg-primary px-4 py-2 text-sm font-medium text-primary-foreground",
-              "hover:bg-primary/90",
+              "bg-primary px-4 py-2 text-sm font-medium text-rich-black",
+              "hover:bg-primary/90 transition-colors",
             )}>
             {t("home_view_posts")}
           </Link>
@@ -92,6 +144,3 @@ export const HomeModule = () => {
     </div>
   );
 };
-
-
-

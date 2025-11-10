@@ -1,5 +1,3 @@
-import { PageContainer } from "@/app/shared/components/containers";
-
 //component
 /**
  * NotFound component.
@@ -7,12 +5,12 @@ import { PageContainer } from "@/app/shared/components/containers";
 export const NotFound = () => {
   //return
   return (
-    <PageContainer
-      className="flex min-h-[60vh] flex-col items-center justify-center gap-2
-        text-center">
+    <div
+      className="mx-auto my-8 flex min-h-[60vh] flex-col items-center
+        justify-center gap-2 text-center">
       <div className="text-6xl font-bold text-foreground">404</div>
       <div className="text-2xl font-semibold text-foreground">Not Found</div>
-    </PageContainer>
+    </div>
   );
 };
 

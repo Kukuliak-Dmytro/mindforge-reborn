@@ -32,12 +32,16 @@
   "auth_or": "Або",
   "auth_register_title": "Реєстрація",
   "auth_register_description": "Створіть новий обліковий запис",
-  "auth_register_label_name": "Ім'я",
-  "auth_register_placeholder_name": "Ім'я",
+  "auth_register_label_firstName": "Ім'я",
+  "auth_register_placeholder_firstName": "Ім'я",
+  "auth_register_label_lastName": "Прізвище",
+  "auth_register_placeholder_lastName": "Прізвище",
   "auth_register_label_email": "Електронна пошта",
   "auth_register_placeholder_email": "Електронна пошта",
   "auth_register_label_password": "Пароль",
   "auth_register_placeholder_password": "Пароль",
+  "auth_register_label_confirmPassword": "Підтвердіть пароль",
+  "auth_register_placeholder_confirmPassword": "Підтвердіть пароль",
   "auth_register_button": "Зареєструватися",
   "auth_register_button_loading": "Створення облікового запису...",
   "auth_register_error": "Помилка реєстрації",
@@ -71,5 +75,7 @@
       "maxLength": "Пошуковий запит має бути не більше 100 символів",
       "invalidCharacters": "Пошуковий запит містить недопустимі символи"
     }
-  }
+  },
+  "student_title": "Студент",
+  "tutor_title": "Репетитор"
 }
