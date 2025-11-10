@@ -46,42 +46,44 @@ export const LoginModule = () => {
 
   //return
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      {/* new field component */}
-      <h1 className="text-3xl font-bold text-center">
-        {t("auth_login_title")}
-      </h1>
-      <Field>
-        <FieldLabel htmlFor="email">{t("auth_login_label_email")}</FieldLabel>
-        <Input
-          {...register("email")}
-          id="email"
-          type="email"
-          placeholder={t("auth_login_placeholder_email")}
-        />
-        {/* allows to display multiple errors in the same field */}
-        {/* convert to an array  */}
-        <FieldError errors={errors.email ? [errors.email] : []} />
-      </Field>
+    <section>
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+        <Field>
+          <FieldLabel htmlFor="email">{t("auth_login_label_email")}</FieldLabel>
+          <Input
+            {...register("email")}
+            id="email"
+            type="email"
+            placeholder={t("auth_login_placeholder_email")}
+          />
+          {/* allows to display multiple errors in the same field */}
+          {/* convert to an array  */}
+          <FieldError errors={errors.email ? [errors.email] : []} />
+        </Field>
 
-      <Field>
-        <FieldLabel htmlFor="password">
-          {t("auth_login_label_password")}
-        </FieldLabel>
-        <Input
-          {...register("password")}
-          id="password"
-          type="password"
-          placeholder={t("auth_login_placeholder_password")}
-        />
-        <FieldError errors={errors.password ? [errors.password] : []} />
-      </Field>
+        <Field>
+          <FieldLabel htmlFor="password">
+            {t("auth_login_label_password")}
+          </FieldLabel>
+          <Input
+            {...register("password")}
+            id="password"
+            type="password"
+            placeholder={t("auth_login_placeholder_password")}
+          />
+          <FieldError errors={errors.password ? [errors.password] : []} />
+        </Field>
 
-      {error && <div className="text-red-500 text-sm">{error}</div>}
+        {error && (
+          <div className="bg-danger/10 border border-danger/20 text-danger px-4 py-3 rounded-small">
+            {error}
+          </div>
+        )}
 
-      <Button type="submit" disabled={isLoading}>
-        {isLoading ? t("auth_login_button_loading") : t("auth_login_button")}
-      </Button>
-    </form>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? t("auth_login_button_loading") : t("auth_login_button")}
+        </Button>
+      </form>
+    </section>
   );
 };

@@ -1,6 +1,6 @@
 import ky, { type KyInstance } from "ky";
 
-import { envClient } from "@/config/envs";
+import { envClient } from "@/config/env";
 
 //constant
 /**

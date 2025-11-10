@@ -1,7 +1,7 @@
 import { GrowthBook } from "@growthbook/growthbook";
 import { cookies } from "next/headers";
 
-import { envServer } from "@/config/envs";
+import { envServer } from "@/config/env";
 import { USER_ID_COOKIE } from "@/proxy";
 
 // growthbook

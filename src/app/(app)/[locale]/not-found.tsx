@@ -1,4 +1,4 @@
-import { PageContainer } from "@/app/shared/components/page-container";
+import { PageContainer } from "@/app/shared/components/containers";
 
 //component
 /**

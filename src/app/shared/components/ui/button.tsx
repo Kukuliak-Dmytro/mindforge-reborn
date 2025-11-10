@@ -1,82 +1,95 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
+"use client";
 import { cva, type VariantProps } from "class-variance-authority";
-
 import { cn } from "@/app/shared/utils/utils";
+import Link from "next/link";
+import React from "react";
 
-/**
- * Button variant styles configuration.
- *
- * This configuration defines all available button variants and sizes
- * with proper styling for different use cases and states.
- *
- * @constant buttonVariants
- */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+  "flex items-center justify-center text-center font-semibold whitespace-nowrap shadow-small cursor-pointer transition-all hover:scale-105 active:scale-95 rounded-medium h-10 min-w-10",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
-        secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+        primary: "bg-primary text-rich-black",
+        secondary: "bg-secondary text-rich-black",
+        danger: "bg-danger text-rich-black",
+        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        ghost: "bg-transparent hover:bg-accent hover:text-accent-foreground",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
-        icon: "size-9",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
+        default: "text-lg py-2.5 px-6",
+        large: "text-2xl py-4 px-8 h-[60px] min-w-[250px] rounded-rounded",
+        icon: "w-10 p-0 m-0",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
       size: "default",
     },
-  },
+  }
 );
 
-/**
- * Button component for interactive actions.
- *
- * This component provides a flexible button with multiple variants and sizes,
- * support for icons, and proper accessibility features. It can render as a button
- * or as a child component using the asChild prop.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @param props.variant - Button variant (default, destructive, outline, secondary, ghost, link)
- * @param props.size - Button size (default, sm, lg, icon, icon-sm, icon-lg)
- * @param props.asChild - Whether to render as a child component
- * @returns JSX element representing the button
- */
-function Button({
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  children: React.ReactNode;
+  href?: string;
+  width?: number;
+  height?: number;
+}
+
+export function Button({
   className,
   variant,
   size,
-  asChild = false,
+  children,
+  href,
+  width,
+  height,
   ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
-  const Comp = asChild ? Slot : "button";
+}: ButtonProps) {
+  const styles = cn(buttonVariants({ variant, size }), className);
+
+  if (href) {
+    return (
+      <Link 
+        href={href} 
+        className={styles} 
+        style={{ 
+          ...(width ? { width: `${width}px` } : {}), 
+          ...(height ? { height: `${height}px` } : {}) 
+        }}
+      >
+        {children}
+      </Link>
+    );
+  }
 
   return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+    <button 
+      className={styles} 
+      style={{ 
+        ...(width ? { width: `${width}px` } : {}), 
+        ...(height ? { height: `${height}px` } : {}) 
+      }}
+      
       {...props}
-    />
+    >
+      {children}
+    </button>
   );
 }
 
-export { Button, buttonVariants };
+// Convenience components for the different variants
+export function PrimaryButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button variant="primary" {...props} />;
+}
+
+export function SecondaryButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button variant="secondary" {...props} />;
+}
+
+export function DangerButton(props: Omit<ButtonProps, 'variant'>) {
+  return <Button variant="danger" {...props} />;
+}
+
+export { buttonVariants };

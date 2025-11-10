@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { HomeModule } from "@/app/modules/home";
-import { PageContainer } from "@/app/shared/components/page-container";
+import { PageContainer } from "@/app/shared/components/containers";
 import { routing } from "@/pkg/libraries/locale/routing";
 
 //interface

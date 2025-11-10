@@ -3,7 +3,7 @@
 import mixpanel from "mixpanel-browser";
 import * as Sentry from "@sentry/nextjs";
 
-import { envClient } from "@/config/envs";
+import { envClient } from "@/config/env";
 import { setMixpanelInitialized } from "./mixpanel.events";
 
 // Singleton state (no class)

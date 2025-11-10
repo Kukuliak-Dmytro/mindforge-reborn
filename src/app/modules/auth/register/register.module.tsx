@@ -46,10 +46,7 @@ export const RegisterModule = () => {
 
   //return
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      <h1 className="text-3xl font-bold text-center">
-        {t("auth_register_title")}
-      </h1>
+    <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
       <Field>
         <FieldLabel htmlFor="name">{t("auth_register_label_name")}</FieldLabel>
         <Input
@@ -87,7 +84,13 @@ export const RegisterModule = () => {
         <FieldError errors={errors.password ? [errors.password] : []} />
       </Field>
 
-      {error && <div className="text-red-500 text-sm">{error}</div>}
+      {error && (
+        <div
+          className="bg-danger/10 border border-danger/20 text-danger px-4 py-3
+            rounded-small">
+          {error}
+        </div>
+      )}
 
       <Button type="submit" disabled={isLoading}>
         {isLoading

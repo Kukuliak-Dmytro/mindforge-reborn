@@ -6,9 +6,9 @@ import { FC, ReactNode } from "react";
 
 import { gothic, franklin } from "@/config/fonts";
 import "@/config/styles/globals.css";
-import { LayoutModule } from "@/app/modules/layout/layout.module";
+import { AuthLayoutWrapper } from "@/app/modules/layout/auth-layout-wrapper.component";
 import { ScanComponent } from "@/pkg/libraries/scan/scan.component";
-import { envServer } from "@/config/envs";
+import { envServer } from "@/config/env";
 import { RestApiProvider } from "@/pkg/libraries/rest-api/provider";
 import { UiProvider } from "@/pkg/libraries/ui";
 import { routing } from "@/pkg/libraries/locale/routing";
@@ -73,7 +73,7 @@ export const RootLayout: FC<Readonly<IProps>> = async (props) => {
         <RestApiProvider>
           <UiProvider>
             <NextIntlClientProvider>
-              <LayoutModule>{children}</LayoutModule>
+              <AuthLayoutWrapper>{children}</AuthLayoutWrapper>
             </NextIntlClientProvider>
           </UiProvider>
         </RestApiProvider>

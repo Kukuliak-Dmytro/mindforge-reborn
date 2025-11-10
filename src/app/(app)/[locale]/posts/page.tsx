@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { PostsModule } from "@/app/modules/posts";
-import { PageContainer } from "@/app/shared/components/page-container";
+import { PageContainer } from "@/app/shared/components/containers";
 import { getQueryClient } from "@/pkg/libraries/rest-api/service";
 import {
   postsInfiniteQueryOptions,

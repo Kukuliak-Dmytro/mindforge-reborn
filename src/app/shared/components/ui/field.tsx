@@ -1,48 +1,26 @@
-"use client";
+"use client"
 
-import { useMemo } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { useMemo } from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
-import { cn } from "@/app/shared/utils/utils";
-import { Label } from "@/app/shared/components/ui/label";
-import { Separator } from "@/app/shared/components/ui/separator";
+import { cn } from "@/app/shared/utils/utils"
+import { Label } from "@/app/shared/components/ui/label"
+import { Separator } from "@/app/shared/components/ui/separator"
 
-/**
- * FieldSet component for grouping form fields.
- *
- * This component provides a fieldset wrapper for grouping related form fields
- * with proper spacing and layout management.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @returns JSX element representing the fieldset
- */
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (
     <fieldset
       data-slot="field-set"
       className={cn(
         "flex flex-col gap-6",
-        `has-[>[data-slot=checkbox-group]]:gap-3
-        has-[>[data-slot=radio-group]]:gap-3`,
-        className,
+        "has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
+        className
       )}
       {...props}
     />
-  );
+  )
 }
 
-/**
- * FieldLegend component for form field legends.
- *
- * This component provides a legend element for form fields with different
- * styling variants for legend and label appearances.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @param props.variant - Styling variant (legend or label)
- * @returns JSX element representing the legend
- */
 function FieldLegend({
   className,
   variant = "legend",
@@ -56,35 +34,24 @@ function FieldLegend({
         "mb-3 font-medium",
         "data-[variant=legend]:text-base",
         "data-[variant=label]:text-sm",
-        className,
+        className
       )}
       {...props}
     />
-  );
+  )
 }
 
-/**
- * FieldGroup component for grouping related form fields.
- *
- * This component provides a container for grouping related form fields
- * with proper spacing and layout management.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @returns JSX element representing the field group
- */
 function FieldGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="field-group"
       className={cn(
-        `group/field-group @container/field-group flex w-full flex-col gap-7
-        data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4`,
-        className,
+        "group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 [&>[data-slot=field-group]]:gap-4",
+        className
       )}
       {...props}
     />
-  );
+  )
 }
 
 const fieldVariants = cva(
@@ -108,20 +75,9 @@ const fieldVariants = cva(
     defaultVariants: {
       orientation: "vertical",
     },
-  },
-);
+  }
+)
 
-/**
- * Field component for form field containers.
- *
- * This component provides a flexible container for form fields with different
- * orientation options (vertical, horizontal, responsive) and proper styling.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @param props.orientation - Field orientation (vertical, horizontal, responsive)
- * @returns JSX element representing the field container
- */
 function Field({
   className,
   orientation = "vertical",
@@ -135,42 +91,22 @@ function Field({
       className={cn(fieldVariants({ orientation }), className)}
       {...props}
     />
-  );
+  )
 }
 
-/**
- * FieldContent component for form field content containers.
- *
- * This component provides a container for form field content with proper
- * spacing and layout management.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @returns JSX element representing the field content container
- */
 function FieldContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="field-content"
       className={cn(
         "group/field-content flex flex-1 flex-col gap-1.5 leading-snug",
-        className,
+        className
       )}
       {...props}
     />
-  );
+  )
 }
 
-/**
- * FieldLabel component for form field labels.
- *
- * This component provides a label element for form fields with proper
- * styling and accessibility features.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @returns JSX element representing the field label
- */
 function FieldLabel({
   className,
   ...props
@@ -179,161 +115,111 @@ function FieldLabel({
     <Label
       data-slot="field-label"
       className={cn(
-        `group/field-label peer/field-label flex w-fit gap-2 leading-snug
-        group-data-[disabled=true]/field:opacity-50`,
-        `has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col
-        has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border
-        [&>*]:data-[slot=field]:p-4`,
-        `has-data-[state=checked]:bg-primary/5
-        has-data-[state=checked]:border-primary
-        dark:has-data-[state=checked]:bg-primary/10`,
-        className,
+        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50",
+        "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>*]:data-[slot=field]:p-4",
+        "has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10",
+        className
       )}
       {...props}
     />
-  );
+  )
 }
 
-/**
- * FieldTitle component for form field titles.
- *
- * This component provides a title element for form fields with proper
- * styling and typography.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @returns JSX element representing the field title
- */
 function FieldTitle({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="field-label"
       className={cn(
-        `flex w-fit items-center gap-2 text-sm leading-snug font-medium
-        group-data-[disabled=true]/field:opacity-50`,
-        className,
+        "flex w-fit items-center gap-2 text-sm leading-snug font-medium group-data-[disabled=true]/field:opacity-50",
+        className
       )}
       {...props}
     />
-  );
+  )
 }
 
-/**
- * FieldDescription component for form field descriptions.
- *
- * This component provides a description element for form fields with proper
- * styling and typography for help text.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @returns JSX element representing the field description
- */
 function FieldDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
     <p
       data-slot="field-description"
       className={cn(
-        `text-muted-foreground text-sm leading-normal font-normal
-        group-has-[[data-orientation=horizontal]]/field:text-balance`,
+        "text-muted-foreground text-sm leading-normal font-normal group-has-[[data-orientation=horizontal]]/field:text-balance",
         "last:mt-0 nth-last-2:-mt-1 [[data-variant=legend]+&]:-mt-1.5",
         "[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4",
-        className,
+        className
       )}
       {...props}
     />
-  );
+  )
 }
 
-/**
- * FieldSeparator component for form field separators.
- *
- * This component provides a visual separator between form fields with optional
- * content display and proper styling.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @param props.children - Optional content to display in the separator
- * @returns JSX element representing the field separator
- */
 function FieldSeparator({
   children,
   className,
   ...props
 }: React.ComponentProps<"div"> & {
-  children?: React.ReactNode;
+  children?: React.ReactNode
 }) {
   return (
     <div
       data-slot="field-separator"
       data-content={!!children}
       className={cn(
-        `relative -my-2 h-5 text-sm
-        group-data-[variant=outline]/field-group:-mb-2`,
-        className,
+        "relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2",
+        className
       )}
-      {...props}>
+      {...props}
+    >
       <Separator className="absolute inset-0 top-1/2" />
       {children && (
         <span
-          className="bg-background text-muted-foreground relative mx-auto block
-            w-fit px-2"
-          data-slot="field-separator-content">
+          className="bg-background text-muted-foreground relative mx-auto block w-fit px-2"
+          data-slot="field-separator-content"
+        >
           {children}
         </span>
       )}
     </div>
-  );
+  )
 }
 
-/**
- * FieldError component for form field error display.
- *
- * This component provides error display for form fields with support for
- * multiple error messages and proper accessibility features.
- *
- * @param props - The component props
- * @param props.className - Additional CSS classes
- * @param props.children - Custom error content
- * @param props.errors - Array of error objects to display
- * @returns JSX element representing the field error display
- */
 function FieldError({
   className,
   children,
   errors,
   ...props
 }: React.ComponentProps<"div"> & {
-  errors?: Array<{ message?: string } | undefined>;
+  errors?: Array<{ message?: string } | undefined>
 }) {
   const content = useMemo(() => {
     if (children) {
-      return children;
+      return children
     }
 
     if (!errors?.length) {
-      return null;
+      return null
     }
 
     const uniqueErrors = [
       ...new Map(errors.map((error) => [error?.message, error])).values(),
-    ];
+    ]
 
     if (uniqueErrors?.length == 1) {
-      return uniqueErrors[0]?.message;
+      return uniqueErrors[0]?.message
     }
 
     return (
       <ul className="ml-4 flex list-disc flex-col gap-1">
         {uniqueErrors.map(
           (error, index) =>
-            error?.message && <li key={index}>{error.message}</li>,
+            error?.message && <li key={index}>{error.message}</li>
         )}
       </ul>
-    );
-  }, [children, errors]);
+    )
+  }, [children, errors])
 
   if (!content) {
-    return null;
+    return null
   }
 
   return (
@@ -341,10 +227,11 @@ function FieldError({
       role="alert"
       data-slot="field-error"
       className={cn("text-destructive text-sm font-normal", className)}
-      {...props}>
+      {...props}
+    >
       {content}
     </div>
-  );
+  )
 }
 
 export {
@@ -358,4 +245,4 @@ export {
   FieldSet,
   FieldContent,
   FieldTitle,
-};
+}

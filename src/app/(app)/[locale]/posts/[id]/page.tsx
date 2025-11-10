@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { PostModule } from "@/app/modules/post";
-import { PageContainer } from "@/app/shared/components/page-container";
+import { PageContainer } from "@/app/shared/components/containers";
 import { routing } from "@/pkg/libraries/locale/routing";
 
 export const revalidate = 30;

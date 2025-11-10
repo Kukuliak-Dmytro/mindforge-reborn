@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { headers } from "next/headers";
 import { auth } from "@/pkg/libraries/better-auth";
 import createMiddleware from "next-intl/middleware";
 import { hasLocale } from "next-intl";
@@ -32,11 +31,33 @@ const getLocaleFromRequest = (request: NextRequest): string => {
 
 //function
 /**
+ * Checks if the pathname is an auth route (login or register).
+ */
+const isAuthRoute = (pathname: string): boolean => {
+  // Check for exact matches or paths ending with /login or /register
+  return (
+    pathname === "/login" ||
+    pathname === "/register" ||
+    pathname.endsWith("/login") ||
+    pathname.endsWith("/register")
+  );
+};
+
+//function
+/**
  * Proxy middleware for authentication and internationalization.
  */
 export const proxy = async (request: NextRequest) => {
+  const pathname = request.nextUrl.pathname;
+
+  // Skip authentication check for auth routes
+  if (isAuthRoute(pathname)) {
+    // Just handle internationalization routing for auth routes
+    return intlMiddleware(request);
+  }
+
   const session = await auth.api.getSession({
-    headers: await headers(),
+    headers: request.headers,
   });
 
   if (!session) {
@@ -71,7 +92,10 @@ export const proxy = async (request: NextRequest) => {
 //constant
 /**
  * Middleware configuration.
+ * Excludes:
+ * - API routes, Next.js internals, Vercel routes
+ * - Static files (anything with a dot)
  */
 export const config = {
-  matcher: ["/((?!api|_next|_vercel|.*\\..*|.*/login|.*/register).*)"],
+  matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"],
 };

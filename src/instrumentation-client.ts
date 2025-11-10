@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/nextjs";
 
-import { envClient } from "@/config/envs";
+import { envClient } from "@/config/env";
 
 // init
 Sentry.init({
