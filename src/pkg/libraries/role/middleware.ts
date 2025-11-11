@@ -33,9 +33,9 @@ export const extractPathnameWithoutLocale = (
 /**
  * Extracts role from session with default fallback.
  */
-export const extractRoleFromSession = (
-  session: { user: { role?: UserRole } },
-): UserRole => {
+export const extractRoleFromSession = (session: {
+  user: { role?: UserRole };
+}): UserRole => {
   return (session.user as { role?: UserRole }).role || "STUDENT";
 };
 
@@ -53,7 +53,8 @@ export const checkRouteAccess = (
   // Tutor-only routes
   if (pathnameWithoutLocale.startsWith("/tutor")) {
     if (role !== "TUTOR") {
-      const homePath = currentLocale === defaultLocale ? "/" : `/${currentLocale}`;
+      const homePath =
+        currentLocale === defaultLocale ? "/" : `/${currentLocale}`;
       return {
         shouldRedirect: true,
         redirectPath: homePath,
@@ -90,4 +91,3 @@ export const checkRouteAccess = (
     redirectPath: null,
   };
 };
-

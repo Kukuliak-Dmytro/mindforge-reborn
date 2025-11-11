@@ -3,7 +3,7 @@ import { Locale, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
-import { RegisterModule } from "@/app/modules/auth";
+import { RegisterModule } from "@/app/modules/shared/auth";
 import { routing } from "@/pkg/libraries/locale/routing";
 
 //interface

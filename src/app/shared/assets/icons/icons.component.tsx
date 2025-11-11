@@ -22,7 +22,18 @@ interface IIconsProps {
   color?: string;
 }
 
-const SUBJECT_ICON_MAP: Record<string, "geography" | "english" | "mathematics" | "biology" | "informatics" | "physics" | "ukrainian" | "chemistry" | "history"> = {
+const SUBJECT_ICON_MAP: Record<
+  string,
+  | "geography"
+  | "english"
+  | "mathematics"
+  | "biology"
+  | "informatics"
+  | "physics"
+  | "ukrainian"
+  | "chemistry"
+  | "history"
+> = {
   Geo: "geography",
   Eng: "english",
   Mat: "mathematics",
@@ -34,7 +45,10 @@ const SUBJECT_ICON_MAP: Record<string, "geography" | "english" | "mathematics" |
   His: "history",
 };
 
-const CATEGORY_ICON_MAP: Record<string, "exam" | "tutoring" | "diploma" | "homework" | "difficulties"> = {
+const CATEGORY_ICON_MAP: Record<
+  string,
+  "exam" | "tutoring" | "diploma" | "homework" | "difficulties"
+> = {
   KR: "exam",
   TT: "tutoring",
   DR: "diploma",
@@ -42,9 +56,15 @@ const CATEGORY_ICON_MAP: Record<string, "exam" | "tutoring" | "diploma" | "homew
   DT: "difficulties",
 };
 
-export const Icons: FC<IIconsProps> = ({ icon, size = 64, color = "currentColor" }) => {
+export const Icons: FC<IIconsProps> = ({
+  icon,
+  size = 64,
+  color = "currentColor",
+}) => {
   if (SUBJECT_ICON_MAP[icon]) {
-    return <SubjectIcon icon={SUBJECT_ICON_MAP[icon]} size={size} color={color} />;
+    return (
+      <SubjectIcon icon={SUBJECT_ICON_MAP[icon]} size={size} color={color} />
+    );
   }
 
   if (CATEGORY_ICON_MAP[icon]) {
@@ -53,4 +73,3 @@ export const Icons: FC<IIconsProps> = ({ icon, size = 64, color = "currentColor"
 
   return null;
 };
-

@@ -19,7 +19,9 @@ export const ChatCard = ({ ...props }: IChatCardProps) => {
         <h4>Петро Петров</h4>
         <div className="flex justify-between items-center w-full">
           <h6>Підготовка до ЗНО з математики</h6>
-          <Button variant="primary" href="/chats">Перейти</Button>
+          <Button variant="primary" href="/chats">
+            Перейти
+          </Button>
         </div>
       </div>
     </div>

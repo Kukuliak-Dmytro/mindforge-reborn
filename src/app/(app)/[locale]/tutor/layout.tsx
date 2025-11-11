@@ -1,4 +1,4 @@
-import { LayoutModule } from "@/app/modules/layout/layout.module";
+import { LayoutModule } from "@/app/modules/shared/layout/";
 
 export default function TutorLayout({
   children,
