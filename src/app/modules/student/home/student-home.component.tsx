@@ -15,7 +15,6 @@ import {
   STUDENT_HOME_TOP_SPECIALISTS,
   STUDENT_HOME_TESTIMONIALS,
 } from "./student-home.constants";
-import { StepIcon } from "@/app/shared/assets/icons";
 
 export const StudentHomeModule = () => {
   return (
@@ -53,7 +52,7 @@ export const StudentHomeModule = () => {
 
           <div className="hidden lg:block lg:absolute lg:right-0 lg:-top-[60px]">
             <Image
-              src="/assets/images/hero-img.png"
+              src="/assets/images/hero-img-student.png"
               alt="Hero image"
               width={500}
               height={600}
@@ -98,13 +97,7 @@ export const StudentHomeModule = () => {
 
           <div className="flex flex-col gap-6 w-full">
             {STUDENT_HOME_STEPS.map((stepData) => (
-              <StepCard
-                key={stepData.step}
-                title={stepData.title}
-                content={stepData.content}
-                step={stepData.step}>
-                <StepIcon step={stepData.step} />
-              </StepCard>
+              <StepCard key={stepData.step} {...stepData} />
             ))}
           </div>
         </div>

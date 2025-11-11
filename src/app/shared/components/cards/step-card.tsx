@@ -1,26 +1,21 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import { cn } from "@/app/shared/utils/utils";
+import { StepIcon } from "@/app/shared/assets/icons";
 
 export interface IStepCardProps {
   step: number;
   title: string;
   content: string;
-  children?: ReactNode;
 }
 
-export const StepCard: FC<IStepCardProps> = ({
-  step,
-  title,
-  content,
-  children,
-}) => {
+export const StepCard: FC<IStepCardProps> = ({ step, title, content }) => {
   return (
     <div
       className={cn(
         `p-4 flex gap-4 bg-background rounded-medium shadow-double text-left
         relative`,
       )}>
-      {children}
+      <StepIcon step={step} />
       <div className={cn("flex flex-col gap-2")}>
         <h4>{title}</h4>
         <p>{content}</p>
