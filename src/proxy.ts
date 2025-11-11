@@ -3,7 +3,11 @@ import { auth } from "@/pkg/libraries/better-auth";
 import createMiddleware from "next-intl/middleware";
 import { hasLocale } from "next-intl";
 import { routing } from "./pkg/libraries/locale";
-import { isStudentOnlyRoute, type UserRole } from "./pkg/libraries/role";
+import {
+  extractPathnameWithoutLocale,
+  extractRoleFromSession,
+  checkRouteAccess,
+} from "./pkg/libraries/role";
 
 //constant
 /**
@@ -64,12 +68,12 @@ export const proxy = async (request: NextRequest) => {
   });
 
   // Debug: Log cookie header
-  const cookieHeader = headers.get("cookie");
-  if (cookieHeader) {
-    console.log("Cookies being forwarded:", cookieHeader.substring(0, 100));
-  } else {
-    console.log("No cookies found in request headers");
-  }
+  // const cookieHeader = headers.get("cookie");
+  // if (cookieHeader) {
+  //   console.log("Cookies being forwarded:", cookieHeader.substring(0, 100));
+  // } else {
+  //   console.log("No cookies found in request headers");
+  // }
 
   const session = await auth.api.getSession({
     headers,
@@ -84,60 +88,33 @@ export const proxy = async (request: NextRequest) => {
     return NextResponse.redirect(new URL(loginPath, request.url));
   }
 
-  console.log("Session found, user ID:", session.user.id);
+  // console.log("Session found, user ID:", session.user.id);
 
-  // Get user role from session
-  const userRole = (session.user as { role?: UserRole }).role;
-  const role = userRole || "STUDENT"; // Default to STUDENT if role not present
+  // Extract role from session
+  const role = extractRoleFromSession(session);
 
-  // Role-based route protection
   // Extract pathname without locale prefix
-  let pathnameWithoutLocale = pathname;
-  for (const locale of routing.locales) {
-    if (pathname.startsWith(`/${locale}/`)) {
-      pathnameWithoutLocale = pathname.slice(`/${locale}`.length);
-      break;
-    } else if (pathname === `/${locale}`) {
-      pathnameWithoutLocale = "/";
-      break;
-    }
-  }
+  const pathnameWithoutLocale = extractPathnameWithoutLocale(
+    pathname,
+    routing.locales,
+  );
 
-  // Tutor-only routes
-  if (pathnameWithoutLocale.startsWith("/tutor")) {
-    if (role !== "TUTOR") {
-      console.log(
-        `User with role ${role} attempted to access tutor route, redirecting to home`,
-      );
-      const locale = getLocaleFromRequest(request);
-      const homePath = locale === routing.defaultLocale ? "/" : `/${locale}`;
-      return NextResponse.redirect(new URL(homePath, request.url));
-    }
-  }
+  // Check route access based on role
+  const currentLocale = getLocaleFromRequest(request);
+  const accessCheck = checkRouteAccess(
+    pathnameWithoutLocale,
+    role,
+    routing.defaultLocale,
+    currentLocale,
+  );
 
-  // Student-only routes (when not under /tutor)
-  // Check if tutor is trying to access student routes (including root "/")
-  if (role === "TUTOR") {
-    // Root "/" is student home - redirect tutors to tutor home
-    if (pathnameWithoutLocale === "/") {
-      console.log(
-        `Tutor attempted to access student home, redirecting to tutor home`,
-      );
-      const locale = getLocaleFromRequest(request);
-      const tutorPath =
-        locale === routing.defaultLocale ? "/tutor" : `/${locale}/tutor`;
-      return NextResponse.redirect(new URL(tutorPath, request.url));
-    }
-    // Other student-only routes
-    if (isStudentOnlyRoute(pathnameWithoutLocale)) {
-      console.log(
-        `Tutor attempted to access student route, redirecting to tutor home`,
-      );
-      const locale = getLocaleFromRequest(request);
-      const tutorPath =
-        locale === routing.defaultLocale ? "/tutor" : `/${locale}/tutor`;
-      return NextResponse.redirect(new URL(tutorPath, request.url));
-    }
+  if (accessCheck.shouldRedirect && accessCheck.redirectPath) {
+    console.log(
+      `User with role ${role} attempted to access restricted route, redirecting to ${accessCheck.redirectPath}`,
+    );
+    return NextResponse.redirect(
+      new URL(accessCheck.redirectPath, request.url),
+    );
   }
 
   // Handle internationalization routing

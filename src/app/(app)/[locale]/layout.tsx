@@ -12,8 +12,6 @@ import { UiProvider } from "@/pkg/libraries/ui";
 import { routing } from "@/pkg/libraries/locale/routing";
 import { IntegrationsProvider } from "@/pkg/integrations/integrations.provider";
 import { comfortaa, quicksand } from "@/config/fonts";
-import { RoleProvider } from "@/pkg/libraries/role/provider";
-import { getRoleFromServer } from "@/pkg/libraries/role/server";
 
 //interface
 interface IProps {
@@ -65,9 +63,6 @@ export const RootLayout: FC<Readonly<IProps>> = async (props) => {
   // Enable static rendering
   setRequestLocale(locale);
 
-  // Get user role from session
-  const role = await getRoleFromServer();
-
   //return
   return (
     <html
@@ -79,9 +74,7 @@ export const RootLayout: FC<Readonly<IProps>> = async (props) => {
         <IntegrationsProvider />
         <RestApiProvider>
           <UiProvider>
-            <RoleProvider role={role}>
-              <NextIntlClientProvider>{children}</NextIntlClientProvider>
-            </RoleProvider>
+            <NextIntlClientProvider>{children}</NextIntlClientProvider>
           </UiProvider>
         </RestApiProvider>
       </body>

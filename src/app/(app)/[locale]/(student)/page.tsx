@@ -2,9 +2,6 @@ import { Locale, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/pkg/libraries/locale/routing";
-import { getRoleFromServer } from "@/pkg/libraries/role/server";
-import { getSession } from "@/pkg/libraries/better-auth/auth";
-import { headers } from "next/headers";
 
 //interface
 interface IProps {
@@ -26,11 +23,6 @@ export const StudentPage = async (props: IProps) => {
   // Enable static rendering
   setRequestLocale(locale);
 
-  // Get role and session for testing
-  const headersList = await headers();
-  const role = await getRoleFromServer();
-  const session = await getSession(headersList);
-
   //return
   return (
     <div
@@ -41,29 +33,6 @@ export const StudentPage = async (props: IProps) => {
           Student Dashboard
         </h1>
         <p className="text-lg text-gray-600">This is the student-only page</p>
-      </div>
-
-      {/* Role Information for Testing */}
-      <div className="rounded-lg border-2 border-primary bg-white p-6 shadow-md">
-        <h2 className="mb-4 text-2xl font-semibold">Role Information</h2>
-        <div className="space-y-2">
-          <div>
-            <span className="font-semibold">Role:</span>{" "}
-            <span className="text-primary">{role || "Not authenticated"}</span>
-          </div>
-          {session && (
-            <>
-              <div>
-                <span className="font-semibold">User ID:</span>{" "}
-                <span className="text-gray-600">{session.user.id}</span>
-              </div>
-              <div>
-                <span className="font-semibold">Email:</span>{" "}
-                <span className="text-gray-600">{session.user.email}</span>
-              </div>
-            </>
-          )}
-        </div>
       </div>
 
       {/* Student-specific content */}
