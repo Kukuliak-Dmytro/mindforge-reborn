@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { getTranslations } from "next-intl/server";
 import { Button } from "@/app/shared/components/ui/button";
 import { SubjectIcon } from "@/app/shared/assets/icons";
 import { ISubjectIconCode } from "@/app/shared/interfaces";
@@ -13,12 +14,14 @@ export interface ISubjectCardProps {
   code: ISubjectIconCode;
 }
 
-export const SubjectCard: FC<ISubjectCardProps> = ({
+export const SubjectCard: FC<ISubjectCardProps> = async ({
   title,
   link,
   type = "subject",
   code,
 }) => {
+  const t = await getTranslations();
+
   // Add query parameter based on type and code
   const href = link.includes("?")
     ? `${link}&${type}=${encodeURIComponent(code)}`
@@ -33,7 +36,7 @@ export const SubjectCard: FC<ISubjectCardProps> = ({
       <SubjectIcon icon={code} size={100} />
       <h4 className={cn("text-[30px]")}>{title}</h4>
       <Button variant="secondary" href={href}>
-        Перейти
+        {t("student_home.subjects_go")}
       </Button>
     </div>
   );

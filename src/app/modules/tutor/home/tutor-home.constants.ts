@@ -6,79 +6,6 @@ import type {
 } from "@/app/shared/components/cards";
 import { FlagIcon } from "@/app/shared/assets/icons";
 
-//constant
-/** Category snippets for tutor home page hero section. */
-export const TUTOR_HOME_CATEGORY_SNIPPETS: ISubjectSnippetProps[] = [
-  {
-    title: "Репетиторство",
-    icon: "tutoring",
-    variant: "Inverse",
-  },
-  {
-    title: "Домашні роботи",
-    icon: "homework",
-    variant: "Inverse",
-  },
-  {
-    title: "Контрольні роботи",
-    icon: "exam",
-    variant: "Inverse",
-  },
-  {
-    title: "Комплексні теми",
-    icon: "complex",
-    variant: "Inverse",
-  },
-  {
-    title: "Дипломні роботи",
-    icon: "diploma",
-    variant: "Inverse",
-  },
-];
-
-//constant
-/** Steps for "How It Works" section. */
-export const TUTOR_HOME_STEPS: IStepCardProps[] = [
-  {
-    step: 6,
-    title: "Створюйте акаунт",
-    content:
-      "Вкажіть всю релевантну інформацію про себе. Особливо важливо додати освіту та сертифікати",
-  },
-  {
-    step: 7,
-    title: "Розміщуйте профіль",
-    content:
-      "Дані про вас будуть відображені при пошуку на нашму сайті. Тому важливо, щоб профіль був привабливим для замовника",
-  },
-  {
-    step: 8,
-    title: "Пропонуйте свої послуги",
-    content:
-      "Шукайте підходяще замовлення в каталозі, і запропонуйте виконання. Якщо клієнт погодиться - ось і ваше замолвення!",
-  },
-];
-
-//constant
-/** Benefits displayed on tutor home page. */
-export const TUTOR_HOME_BENEFITS: IBenefitCardProps[] = [
-  {
-    title: "Швидко",
-    imgSrc: "/assets/images/benefit-img-01.png",
-    color: "primary",
-  },
-  {
-    title: "Просто",
-    imgSrc: "/assets/images/benefit-img-02.png",
-    color: "secondary",
-  },
-  {
-    title: "Ефективно",
-    imgSrc: "/assets/images/benefit-img-03.png",
-    color: "accent",
-  },
-];
-
 //interface
 /** Stats data for tutor home page. */
 export interface IStatsData {
@@ -87,29 +14,111 @@ export interface IStatsData {
   icon?: React.ReactNode;
 }
 
+//type
+/** Translation function type for tutor home module. */
+type TutorHomeTranslations = {
+  (key: string): string;
+};
+
 //function
 /** Returns Ukrainian flag icon component. */
 const getUkraineFlagIcon = () =>
   React.createElement(FlagIcon, { code: "uk", size: 72 });
 
-//constant
-/** Stats displayed on tutor home page. */
-export const TUTOR_HOME_STATS: IStatsData[] = [
+//function
+/** Returns localized category snippets data. */
+export const getTutorHomeCategorySnippets = (
+  t: TutorHomeTranslations,
+): ISubjectSnippetProps[] => [
+  {
+    title: t("tutor_home.category_snippets.tutoring"),
+    icon: "tutoring",
+    variant: "Inverse",
+  },
+  {
+    title: t("tutor_home.category_snippets.homework"),
+    icon: "homework",
+    variant: "Inverse",
+  },
+  {
+    title: t("tutor_home.category_snippets.exam"),
+    icon: "exam",
+    variant: "Inverse",
+  },
+  {
+    title: t("tutor_home.category_snippets.complex"),
+    icon: "complex",
+    variant: "Inverse",
+  },
+  {
+    title: t("tutor_home.category_snippets.diploma"),
+    icon: "diploma",
+    variant: "Inverse",
+  },
+];
+
+//function
+/** Returns localized steps data. */
+export const getTutorHomeSteps = (
+  t: TutorHomeTranslations,
+): IStepCardProps[] => [
+  {
+    step: 6,
+    title: t("tutor_home.steps.step1_title"),
+    content: t("tutor_home.steps.step1_content"),
+  },
+  {
+    step: 7,
+    title: t("tutor_home.steps.step2_title"),
+    content: t("tutor_home.steps.step2_content"),
+  },
+  {
+    step: 8,
+    title: t("tutor_home.steps.step3_title"),
+    content: t("tutor_home.steps.step3_content"),
+  },
+];
+
+//function
+/** Returns localized benefits data. */
+export const getTutorHomeBenefits = (
+  t: TutorHomeTranslations,
+): IBenefitCardProps[] => [
+  {
+    title: t("tutor_home.benefits.fast"),
+    imgSrc: "/assets/images/benefit-img-01.png",
+    color: "primary",
+  },
+  {
+    title: t("tutor_home.benefits.simple"),
+    imgSrc: "/assets/images/benefit-img-02.png",
+    color: "secondary",
+  },
+  {
+    title: t("tutor_home.benefits.effective"),
+    imgSrc: "/assets/images/benefit-img-03.png",
+    color: "accent",
+  },
+];
+
+//function
+/** Returns localized stats data. */
+export const getTutorHomeStats = (t: TutorHomeTranslations): IStatsData[] => [
   {
     value: "1032",
-    label: "Активних фахівців на Sapione",
+    label: t("tutor_home.stats.active_specialists"),
   },
   {
     value: "123",
-    label: "Нових замовлень щоденно",
+    label: t("tutor_home.stats.new_orders_daily"),
   },
   {
     value: "",
-    label: "Спеціалісти з усіх областей України",
+    label: t("tutor_home.stats.specialists_all_regions"),
     icon: getUkraineFlagIcon(),
   },
   {
     value: "13423",
-    label: "Виконаних замовлень",
+    label: t("tutor_home.stats.completed_orders"),
   },
 ];

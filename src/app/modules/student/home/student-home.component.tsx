@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { getTranslations } from "next-intl/server";
 import { Section } from "@/app/shared/components/containers/section";
 import { Button } from "@/app/shared/components/ui/button";
 import {
@@ -8,15 +9,24 @@ import {
 } from "@/app/shared/components/cards";
 import { BestEmployeeCard, TestimonialCard, SubjectCard } from "./elements";
 import {
-  STUDENT_HOME_SUBJECTS,
-  STUDENT_HOME_CATEGORY_SNIPPETS,
-  STUDENT_HOME_STEPS,
-  STUDENT_HOME_BENEFITS,
-  STUDENT_HOME_TOP_SPECIALISTS,
-  STUDENT_HOME_TESTIMONIALS,
+  getStudentHomeSubjects,
+  getStudentHomeCategorySnippets,
+  getStudentHomeSteps,
+  getStudentHomeBenefits,
+  getStudentHomeTopSpecialists,
+  getStudentHomeTestimonials,
 } from "./student-home.constants";
 
-export const StudentHomeModule = () => {
+export const StudentHomeModule = async () => {
+  const t = await getTranslations();
+
+  const subjects = getStudentHomeSubjects(t);
+  const categorySnippets = getStudentHomeCategorySnippets(t);
+  const steps = getStudentHomeSteps(t);
+  const benefits = getStudentHomeBenefits(t);
+  const topSpecialists = getStudentHomeTopSpecialists(t);
+  const testimonials = getStudentHomeTestimonials(t);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -27,11 +37,11 @@ export const StudentHomeModule = () => {
               <span className="text-secondary">Mind</span>
               <span className="text-primary">Forge</span>
               <br />
-              Кузня твого розуму
+              {t("student_home.hero_tagline")}
             </h1>
 
             <div className="flex flex-col gap-2 mb-4">
-              {STUDENT_HOME_CATEGORY_SNIPPETS.map((category) => (
+              {categorySnippets.map((category) => (
                 <SubjectSnippet
                   key={category.icon}
                   title={category.title}
@@ -42,10 +52,10 @@ export const StudentHomeModule = () => {
 
             <div className="flex gap-4 justify-between">
               <Button variant="primary" href="/catalog">
-                Знайти фахівця
+                {t("student_home.hero_find_specialist")}
               </Button>
               <Button variant="secondary" href="/orders/create">
-                Розмістити замовлення
+                {t("student_home.hero_place_order")}
               </Button>
             </div>
           </div>
@@ -65,12 +75,12 @@ export const StudentHomeModule = () => {
       {/* Subjects Section */}
       <Section>
         <div className="flex flex-col gap-12 items-center text-center">
-          <h1>Доступні предмети на сайті:</h1>
+          <h1>{t("student_home.subjects_title")}</h1>
 
           <div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6
               w-full">
-            {STUDENT_HOME_SUBJECTS.map((subject) => (
+            {subjects.map((subject) => (
               <SubjectCard
                 key={subject.code}
                 title={subject.title}
@@ -85,7 +95,7 @@ export const StudentHomeModule = () => {
             size="large"
             className="w-[300px]"
             href="/catalog">
-            Перейти
+            {t("student_home.subjects_go")}
           </Button>
         </div>
       </Section>
@@ -93,10 +103,10 @@ export const StudentHomeModule = () => {
       {/* How It Works Section */}
       <Section>
         <div className="flex flex-col gap-12 items-center text-center">
-          <h1>Як це працює:</h1>
+          <h1>{t("student_home.how_it_works_title")}</h1>
 
           <div className="flex flex-col gap-6 w-full">
-            {STUDENT_HOME_STEPS.map((stepData) => (
+            {steps.map((stepData) => (
               <StepCard key={stepData.step} {...stepData} />
             ))}
           </div>
@@ -106,10 +116,10 @@ export const StudentHomeModule = () => {
       {/* Benefits Section */}
       <Section>
         <div className="flex flex-col gap-12 items-center text-center">
-          <h1>MindForge - це...</h1>
+          <h1>{t("student_home.benefits_title")}</h1>
 
           <div className="flex flex-wrap justify-center gap-8">
-            {STUDENT_HOME_BENEFITS.map((benefit) => (
+            {benefits.map((benefit) => (
               <BenefitCard
                 key={benefit.title}
                 title={benefit.title}
@@ -124,7 +134,7 @@ export const StudentHomeModule = () => {
             size="large"
             className="w-[500px]"
             href="/orders/create">
-            Створити замовлення
+            {t("student_home.benefits_create_order")}
           </Button>
         </div>
       </Section>
@@ -132,10 +142,10 @@ export const StudentHomeModule = () => {
       {/* Top Specialists Section */}
       <Section>
         <div className="flex flex-col gap-12 items-center text-center">
-          <h1>Наші ТОП-фахівці</h1>
+          <h1>{t("student_home.top_specialists_title")}</h1>
 
           <div className="flex justify-center gap-6">
-            {STUDENT_HOME_TOP_SPECIALISTS.map((specialist) => (
+            {topSpecialists.map((specialist) => (
               <BestEmployeeCard
                 key={specialist.name}
                 name={specialist.name}
@@ -148,7 +158,7 @@ export const StudentHomeModule = () => {
           </div>
 
           <Button variant="primary" size="large" className="w-[500px]">
-            Каталог фахівців
+            {t("student_home.top_specialists_catalog")}
           </Button>
         </div>
       </Section>
@@ -156,10 +166,10 @@ export const StudentHomeModule = () => {
       {/* Reviews Section */}
       <Section>
         <div className="flex flex-col gap-12 items-center text-center">
-          <h1>Відгуки про наших фахівців</h1>
+          <h1>{t("student_home.reviews_title")}</h1>
 
           <div className="flex justify-center gap-6">
-            {STUDENT_HOME_TESTIMONIALS.map((testimonial) => (
+            {testimonials.map((testimonial) => (
               <TestimonialCard
                 key={testimonial.name}
                 name={testimonial.name}
@@ -173,7 +183,7 @@ export const StudentHomeModule = () => {
           </div>
 
           <Button variant="primary" size="large" className="w-[350px]">
-            Каталог фахівців
+            {t("student_home.reviews_catalog")}
           </Button>
         </div>
       </Section>
@@ -183,9 +193,9 @@ export const StudentHomeModule = () => {
         <div
           className="flex flex-col md:flex-row justify-between items-center
             border-b-2 border-secondary-text py-6">
-          <h2>Куй знання, змінюй майбутнє</h2>
+          <h2>{t("student_home.cta_text")}</h2>
           <Button variant="primary" size="large" href="/orders/create">
-            Створити замовлення
+            {t("student_home.cta_create_order")}
           </Button>
         </div>
       </Section>

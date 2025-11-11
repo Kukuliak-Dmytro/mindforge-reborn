@@ -13,192 +13,200 @@ import type {
 /** Base catalog link for subject filtering. */
 const CATALOG_BASE_LINK = "/catalog";
 
-//constant
-/** Available subjects on student home page. SubjectCard adds query params automatically. */
-export const STUDENT_HOME_SUBJECTS: ISubjectCardProps[] = [
+//type
+/** Translation function type for student home module. */
+type StudentHomeTranslations = {
+  (key: string): string;
+};
+
+//function
+/** Returns localized subjects data. */
+export const getStudentHomeSubjects = (
+  t: StudentHomeTranslations,
+): ISubjectCardProps[] => [
   {
-    title: "Математика",
+    title: t("student_home.subjects.mathematics"),
     code: "mathematics",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Українська мова",
+    title: t("student_home.subjects.ukrainian"),
     code: "ukrainian",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Англійська мова",
+    title: t("student_home.subjects.english"),
     code: "english",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Біологія",
+    title: t("student_home.subjects.biology"),
     code: "biology",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Географія",
+    title: t("student_home.subjects.geography"),
     code: "geography",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Фізика",
+    title: t("student_home.subjects.physics"),
     code: "physics",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Хімія",
+    title: t("student_home.subjects.chemistry"),
     code: "chemistry",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Історія",
+    title: t("student_home.subjects.history"),
     code: "history",
     link: CATALOG_BASE_LINK,
   },
   {
-    title: "Інформатика",
+    title: t("student_home.subjects.informatics"),
     code: "informatics",
     link: CATALOG_BASE_LINK,
   },
 ];
 
-//constant
-/** Category snippets for home page hero section. */
-export const STUDENT_HOME_CATEGORY_SNIPPETS: ISubjectSnippetProps[] = [
+//function
+/** Returns localized category snippets data. */
+export const getStudentHomeCategorySnippets = (
+  t: StudentHomeTranslations,
+): ISubjectSnippetProps[] => [
   {
-    title: "Репетиторство",
+    title: t("student_home.category_snippets.tutoring"),
     icon: "tutoring",
   },
   {
-    title: "Домашні роботи",
+    title: t("student_home.category_snippets.homework"),
     icon: "homework",
   },
   {
-    title: "Контрольні роботи",
+    title: t("student_home.category_snippets.exam"),
     icon: "exam",
   },
   {
-    title: "Комплексні теми",
+    title: t("student_home.category_snippets.complex"),
     icon: "complex",
   },
   {
-    title: "Дипломні роботи",
+    title: t("student_home.category_snippets.diploma"),
     icon: "diploma",
   },
 ];
 
-//constant
-/** Steps for "How It Works" section. */
-export const STUDENT_HOME_STEPS: IStepCardProps[] = [
+//function
+/** Returns localized steps data. */
+export const getStudentHomeSteps = (
+  t: StudentHomeTranslations,
+): IStepCardProps[] => [
   {
     step: 1,
-    title: "Створюй замовлення",
-    content:
-      "Реєструйся, заповнюй мінімальні дані про себе. Далі - все, що стосується замовлення",
+    title: t("student_home.steps.step1_title"),
+    content: t("student_home.steps.step1_content"),
   },
   {
     step: 2,
-    title: "Обирай фахівця",
-    content:
-      "Необхідного фахівця можна вибрати з каталогу, або ж дочекатися, поки не напишуть і запропонують виконання замовлення",
+    title: t("student_home.steps.step2_title"),
+    content: t("student_home.steps.step2_content"),
   },
   {
     step: 3,
-    title: "Домовляйся про терміни та ціну",
-    content:
-      "Важливо узгодити терміни виконання та ціну замовлення на самому початку, аби потім не виникало складних ситуацій",
+    title: t("student_home.steps.step3_title"),
+    content: t("student_home.steps.step3_content"),
   },
   {
     step: 4,
-    title: "Чекай на виконання",
-    content: "Прояви терпіння!",
+    title: t("student_home.steps.step4_title"),
+    content: t("student_home.steps.step4_content"),
   },
   {
     step: 5,
-    title: "Повтори все ще раз",
-    content:
-      "Дякуюємо, що ви скористалися нашим сервісом! Будемо чекати наступного разу!",
+    title: t("student_home.steps.step5_title"),
+    content: t("student_home.steps.step5_content"),
   },
 ];
 
-//constant
-/** Benefits displayed on home page. */
-export const STUDENT_HOME_BENEFITS: IBenefitCardProps[] = [
+//function
+/** Returns localized benefits data. */
+export const getStudentHomeBenefits = (
+  t: StudentHomeTranslations,
+): IBenefitCardProps[] => [
   {
-    title: "Швидко",
+    title: t("student_home.benefits.fast"),
     imgSrc: "/assets/images/benefit-img-01.png",
     color: "primary",
   },
   {
-    title: "Просто",
+    title: t("student_home.benefits.simple"),
     imgSrc: "/assets/images/benefit-img-02.png",
     color: "secondary",
   },
   {
-    title: "Ефективно",
+    title: t("student_home.benefits.effective"),
     imgSrc: "/assets/images/benefit-img-03.png",
     color: "accent",
   },
 ];
 
-//constant
-/** Top specialists displayed on home page. */
-export const STUDENT_HOME_TOP_SPECIALISTS: IBestEmployeeCardProps[] = [
+//function
+/** Returns localized top specialists data. */
+export const getStudentHomeTopSpecialists = (
+  t: StudentHomeTranslations,
+): IBestEmployeeCardProps[] => [
   {
-    name: "Смирнова Марія",
+    name: t("student_home.top_specialists.specialist1_name"),
     workingSince: "14.01.22",
     rating: "4.9/5",
-    description:
-      "Я підходжу до кожного студента з урахуванням його рівня знань та навчальних потреб, створюючи персоналізовані програми, щоб допомогти досягти найкращих результатів.",
+    description: t("student_home.top_specialists.specialist1_description"),
     avatarId: 1,
   },
   {
-    name: "Іваненко Олександр",
+    name: t("student_home.top_specialists.specialist2_name"),
     workingSince: "12.12.21",
     rating: "4.4/5.0",
-    description:
-      "Маю глибокі знання та практичний досвід у своїй сфері, що дозволяє мені не лише викладати теорію, а й передавати студентам цінні практичні навички",
+    description: t("student_home.top_specialists.specialist2_description"),
     avatarId: 2,
   },
   {
-    name: "Коваль Вероніка",
+    name: t("student_home.top_specialists.specialist3_name"),
     workingSince: "01.01.24",
     rating: "4.7/5",
-    description:
-      "Я професійно допомагаю студентам на всіх етапах написання дипломних робіт: від вибору теми та планування до написання та оформлення роботи відповідно до вимог ВНЗ.",
+    description: t("student_home.top_specialists.specialist3_description"),
     avatarId: 3,
   },
 ];
 
-//constant
-/** Testimonials displayed on home page. */
-export const STUDENT_HOME_TESTIMONIALS: ITestimonialCardProps[] = [
+//function
+/** Returns localized testimonials data. */
+export const getStudentHomeTestimonials = (
+  t: StudentHomeTranslations,
+): ITestimonialCardProps[] => [
   {
-    name: "Куцик Оксана",
+    name: t("student_home.reviews.review1_name"),
     rating: "5/5",
-    subject: "Математика",
-    description:
-      "Відмінний викладач, дуже допоміг!Дуже задоволений роботою з Оксаною! Уроки були зрозумілими, а матеріал поданий цікаво та структуровано.",
-    author: "Таня",
+    subject: t("student_home.reviews.review1_subject"),
+    description: t("student_home.reviews.review1_description"),
+    author: t("student_home.reviews.review1_author"),
     avatarId: 4,
   },
   {
-    name: "Подолов Артем",
+    name: t("student_home.reviews.review2_name"),
     rating: "4.8/5",
-    subject: "Фізика",
-    description:
-      "Фахівець професійно та відповідально підходить до занять. Артем допоміг мені розібратися зі складними темами та підготуватися до іспитів.",
-    author: "Микола",
+    subject: t("student_home.reviews.review2_subject"),
+    description: t("student_home.reviews.review2_description"),
+    author: t("student_home.reviews.review2_author"),
     avatarId: 5,
   },
   {
-    name: "Хартій Ангеліна",
+    name: t("student_home.reviews.review3_name"),
     rating: "4.9/5",
-    subject: "Хімія",
-    description:
-      "Дипломна робота пані Ангеліни перевершила всі мої очікування! Незважаючи на те, що текст дуж епосто розуміти, він вийшов надзвичайно професійним! Рекомендую!",
-    author: "Анастатія",
+    subject: t("student_home.reviews.review3_subject"),
+    description: t("student_home.reviews.review3_description"),
+    author: t("student_home.reviews.review3_author"),
     avatarId: 6,
   },
 ];

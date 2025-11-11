@@ -77,5 +77,115 @@
     }
   },
   "student_title": "Student",
-  "tutor_title": "Tutor"
+  "tutor_title": "Tutor",
+  "student_home": {
+    "hero_tagline": "Forge of Your Mind",
+    "hero_find_specialist": "Find Specialist",
+    "hero_place_order": "Place Order",
+    "subjects_title": "Available Subjects on the Site:",
+    "subjects_go": "Go",
+    "subjects": {
+      "mathematics": "Mathematics",
+      "ukrainian": "Ukrainian Language",
+      "english": "English Language",
+      "biology": "Biology",
+      "geography": "Geography",
+      "physics": "Physics",
+      "chemistry": "Chemistry",
+      "history": "History",
+      "informatics": "Computer Science"
+    },
+    "category_snippets": {
+      "tutoring": "Tutoring",
+      "homework": "Homework",
+      "exam": "Exams",
+      "complex": "Complex Topics",
+      "diploma": "Diploma Works"
+    },
+    "how_it_works_title": "How It Works:",
+    "steps": {
+      "step1_title": "Create Order",
+      "step1_content": "Register, fill in minimal data about yourself. Then - everything related to the order",
+      "step2_title": "Choose Specialist",
+      "step2_content": "You can choose the necessary specialist from the catalog, or wait until they write and offer to complete the order",
+      "step3_title": "Agree on Terms and Price",
+      "step3_content": "It's important to agree on completion terms and order price at the very beginning, so that difficult situations don't arise later",
+      "step4_title": "Wait for Completion",
+      "step4_content": "Show patience!",
+      "step5_title": "Repeat Everything Again",
+      "step5_content": "Thank you for using our service! We'll be waiting for the next time!"
+    },
+    "benefits_title": "MindForge is...",
+    "benefits": {
+      "fast": "Fast",
+      "simple": "Simple",
+      "effective": "Effective"
+    },
+    "benefits_create_order": "Create Order",
+    "top_specialists_title": "Our TOP Specialists",
+    "top_specialists_catalog": "Specialist Catalog",
+    "top_specialists": {
+      "specialist1_name": "Smirnova Maria",
+      "specialist1_description": "I approach each student taking into account their level of knowledge and learning needs, creating personalized programs to help achieve the best results.",
+      "specialist2_name": "Ivanenko Oleksandr",
+      "specialist2_description": "I have deep knowledge and practical experience in my field, which allows me not only to teach theory, but also to pass on valuable practical skills to students",
+      "specialist3_name": "Koval Veronika",
+      "specialist3_description": "I professionally help students at all stages of writing diploma works: from choosing a topic and planning to writing and formatting the work according to university requirements."
+    },
+    "reviews_title": "Reviews About Our Specialists",
+    "reviews_catalog": "Specialist Catalog",
+    "reviews": {
+      "review1_name": "Kutsyk Oksana",
+      "review1_subject": "Mathematics",
+      "review1_description": "Excellent teacher, very helpful! Very satisfied with working with Oksana! The lessons were clear, and the material was presented interestingly and structured.",
+      "review1_author": "Tanya",
+      "review2_name": "Podolov Artem",
+      "review2_subject": "Physics",
+      "review2_description": "The specialist approaches classes professionally and responsibly. Artem helped me understand complex topics and prepare for exams.",
+      "review2_author": "Mykola",
+      "review3_name": "Khartiy Angelina",
+      "review3_subject": "Chemistry",
+      "review3_description": "Ms. Angelina's diploma work exceeded all my expectations! Despite the fact that the text is quite easy to understand, it turned out extremely professional! I recommend!",
+      "review3_author": "Anastasia"
+    },
+    "cta_text": "Forge Knowledge, Change the Future",
+    "cta_create_order": "Create Order"
+  },
+  "tutor_home": {
+    "hero_title": "Start Earning Now",
+    "hero_register": "Register",
+    "hero_orders_catalog": "Orders Catalog",
+    "category_snippets": {
+      "tutoring": "Tutoring",
+      "homework": "Homework",
+      "exam": "Exams",
+      "complex": "Complex Topics",
+      "diploma": "Diploma Works"
+    },
+    "how_it_works_title": "How It Works:",
+    "steps": {
+      "step1_title": "Create Account",
+      "step1_content": "Specify all relevant information about yourself. It's especially important to add education and certificates",
+      "step2_title": "Post Profile",
+      "step2_content": "Your data will be displayed when searching on our site. Therefore, it's important that the profile is attractive to the customer",
+      "step3_title": "Offer Your Services",
+      "step3_content": "Look for a suitable order in the catalog, and offer to complete it. If the client agrees - here's your order!"
+    },
+    "benefits_title": "With our service, find clients",
+    "benefits": {
+      "fast": "Fast",
+      "simple": "Simple",
+      "effective": "Effective"
+    },
+    "benefits_orders_catalog": "Orders Catalog",
+    "stats_title": "Join the MindForge Team",
+    "stats": {
+      "active_specialists": "Active Specialists on Sapione",
+      "new_orders_daily": "New Orders Daily",
+      "specialists_all_regions": "Specialists from All Regions of Ukraine",
+      "completed_orders": "Completed Orders"
+    },
+    "cta_text": "Help People Forge Knowledge!",
+    "cta_register": "Registration"
+  }
 }
