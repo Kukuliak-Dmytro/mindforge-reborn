@@ -23,3 +23,4 @@ const STUDENT_ONLY_ROUTES = [
 export const isStudentOnlyRoute = (path: string): boolean => {
   return STUDENT_ONLY_ROUTES.some((route) => path.includes(route));
 };
+

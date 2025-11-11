@@ -3,12 +3,12 @@ import Image from "next/image";
 import { PrimaryButton, SecondaryButton } from "./button";
 
 const avatarImages = [
-  "/assets/avatars/avatarImg1.png",
-  "/assets/avatars/avatarImg2.png",
-  "/assets/avatars/avatarImg3.png",
-  "/assets/avatars/avatarImg4.png",
-  "/assets/avatars/avatarImg5.png",
-  "/assets/avatars/avatarImg6.png",
+  "/assets/avatars/avatar-img-01.png",
+  "/assets/avatars/avatar-img-02.png",
+  "/assets/avatars/avatar-img-03.png",
+  "/assets/avatars/avatar-img-04.png",
+  "/assets/avatars/avatar-img-05.png",
+  "/assets/avatars/avatar-img-06.png",
 ];
 
 interface AvatarPickerProps {

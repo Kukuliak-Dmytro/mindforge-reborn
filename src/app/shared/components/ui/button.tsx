@@ -77,17 +77,4 @@ export function Button({
   );
 }
 
-// Convenience components for the different variants
-export function PrimaryButton(props: Omit<ButtonProps, "variant">) {
-  return <Button variant="primary" {...props} />;
-}
-
-export function SecondaryButton(props: Omit<ButtonProps, "variant">) {
-  return <Button variant="secondary" {...props} />;
-}
-
-export function DangerButton(props: Omit<ButtonProps, "variant">) {
-  return <Button variant="danger" {...props} />;
-}
-
 export { buttonVariants };

@@ -14,7 +14,9 @@ export const LayoutModule: FC<Readonly<IProps>> = (props) => {
   return (
     <div>
       <HeaderComponent />
-      {children}
+      <main className="flex flex-col items-center justify-center">
+        {children}
+      </main>
     </div>
   );
 };
