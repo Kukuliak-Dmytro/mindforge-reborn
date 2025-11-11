@@ -21,17 +21,22 @@ export const LocaleSwitcher = () => {
   return (
     <>
       {locale === "en" && (
-        <Button variant="outline" onClick={() => switchLocale("uk")} size="sm">
+        <Button
+          variant="outline"
+          onClick={() => switchLocale("uk")}
+          size="default">
           EN
         </Button>
       )}
 
       {locale === "uk" && (
-        <Button variant="outline" onClick={() => switchLocale("en")} size="sm">
+        <Button
+          variant="outline"
+          onClick={() => switchLocale("en")}
+          size="default">
           UK
         </Button>
       )}
     </>
   );
 };
-

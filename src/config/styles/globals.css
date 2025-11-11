@@ -35,10 +35,7 @@ body {
   min-height: 100vh;
   background-color: var(--color-white-bg);
   color: var(--color-rich-black);
-  font-family:
-    var(--font-comfortaa), var(--font-quicksand), system-ui, sans-serif;
 }
-
 /* Typography */
 h1 {
   font-size: 48px;

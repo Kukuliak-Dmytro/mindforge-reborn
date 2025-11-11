@@ -103,3 +103,6 @@ export const requiresRole = (path: string, role: UserRole): boolean => {
   return true; // Public routes
 };
 
+
+
+

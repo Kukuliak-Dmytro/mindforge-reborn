@@ -23,7 +23,9 @@ export const initMixpanel = () => {
     mixpanel.init(envClient.NEXT_PUBLIC_MIXPANEL_TOKEN, {
       autocapture: false,
       debug: process.env.NODE_ENV !== "production",
-      api_host: envClient.NEXT_PUBLIC_MIXPANEL_API_HOST,
+      ...(envClient.NEXT_PUBLIC_MIXPANEL_API_HOST && {
+        api_host: envClient.NEXT_PUBLIC_MIXPANEL_API_HOST,
+      }),
       batch_requests: true,
       batch_size: 50,
       batch_flush_interval_ms: 5000,

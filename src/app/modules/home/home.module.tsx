@@ -83,21 +83,11 @@ export const HomeModule = () => {
                 <span className="font-medium text-dark-gray">Email:</span>
                 <span className="text-rich-black">{session.user.email}</span>
               </div>
-              {session.user.firstName && (
+              {(session.user as { role?: string }).role && (
                 <div className="flex justify-between">
-                  <span className="font-medium text-dark-gray">
-                    First Name:
-                  </span>
+                  <span className="font-medium text-dark-gray">Role:</span>
                   <span className="text-rich-black">
-                    {session.user.firstName}
-                  </span>
-                </div>
-              )}
-              {session.user.lastName && (
-                <div className="flex justify-between">
-                  <span className="font-medium text-dark-gray">Last Name:</span>
-                  <span className="text-rich-black">
-                    {session.user.lastName}
+                    {(session.user as { role?: string }).role}
                   </span>
                 </div>
               )}
@@ -114,28 +104,18 @@ export const HomeModule = () => {
         )}
 
         <div className="flex flex-col gap-4 items-center">
-          <Link
-            href="/posts"
-            locale={locale}
-            className={cn(
-              "inline-flex items-center justify-center rounded-md",
-              "bg-primary px-4 py-2 text-sm font-medium text-rich-black",
-              "hover:bg-primary/90 transition-colors",
-            )}>
-            {t("home_view_posts")}
-          </Link>
           <div className="flex gap-2">
             <Button
               onClick={handleTestServerError}
               disabled={isLoading}
-              variant="destructive"
-              size="sm">
+              variant="danger"
+              size="default">
               {isLoading ? "Testing..." : t("home_test_sentry")}
             </Button>
             <Button
               onClick={handleTestClientError}
-              variant="destructive"
-              size="sm">
+              variant="danger"
+              size="default">
               {t("home_test_sentry_client")}
             </Button>
           </div>
