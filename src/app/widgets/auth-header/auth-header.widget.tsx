@@ -17,7 +17,7 @@ export const AuthHeaderComponent = () => {
     <header
       className={cn(
         "relative z-10 w-full h-[80px] flex justify-center items-center",
-        "bg-gradient-to-t from-white-bg to-white-fg shadow-small",
+        "bg-gradient-to-t from-background to-foreground shadow-small",
       )}>
       <div className="flex justify-between max-w-[1240px] w-full px-4">
         {/* Left side - Logo */}

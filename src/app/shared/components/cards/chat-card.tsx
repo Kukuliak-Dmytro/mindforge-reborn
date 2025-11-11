@@ -12,7 +12,7 @@ interface IChatCardProps {
 export const ChatCard = ({ ...props }: IChatCardProps) => {
   return (
     <div
-      className="bg-white-bg p-6 flex gap-4 shadow-double rounded-medium
+      className="bg-background p-6 flex gap-4 shadow-double rounded-medium
         text-left items-center w-full">
       <Avatar id={props.avartarId} size={100}></Avatar>
       <div className="flex flex-col justify-between w-full">

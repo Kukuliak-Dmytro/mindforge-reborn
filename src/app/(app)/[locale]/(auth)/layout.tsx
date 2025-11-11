@@ -18,11 +18,11 @@ export const AuthLayout: FC<Readonly<IProps>> = (props) => {
 
   //return
   return (
-    <div className="min-h-screen flex flex-col bg-white-bg">
+    <div className="min-h-screen flex flex-col bg-background">
       <AuthHeaderComponent />
       <div
         className="flex-1 flex items-center justify-center bg-gradient-to-br
-          from-white-bg via-white-fg to-white-bg">
+          from-background via-foreground to-background">
         {children}
       </div>
     </div>

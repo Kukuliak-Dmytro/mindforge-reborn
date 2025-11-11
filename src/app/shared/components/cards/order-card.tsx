@@ -43,7 +43,7 @@ export const OrderCard = ({
   }
   return (
     <div
-      className="bg-white-bg p-6 flex flex-col gap-4 text-left shadow-double
+      className="bg-background p-6 flex flex-col gap-4 text-left shadow-double
         rounded-medium items-left">
       {variant === "default" && (
         <>

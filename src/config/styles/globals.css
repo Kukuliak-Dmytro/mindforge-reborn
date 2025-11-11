@@ -10,10 +10,10 @@
   --color-secondary: var(--color-secondary);
   --color-accent: var(--color-accent);
   --color-danger: var(--color-danger);
-  --color-white-bg: var(--color-white-bg);
-  --color-white-fg: var(--color-white-fg);
-  --color-rich-black: var(--color-rich-black);
-  --color-dark-gray: var(--color-dark-gray);
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-primary-text: var(--color-primary-text);
+  --color-secondary-text: var(--color-secondary-text);
 
   /* Shadows - defined in variables.css with light/dark variants */
   --shadow-small: var(--shadow-small);
@@ -33,8 +33,8 @@
 
 body {
   min-height: 100vh;
-  background-color: var(--color-white-bg);
-  color: var(--color-rich-black);
+  background-color: var(--color-background);
+  color: var(--color-primary-text);
 }
 /* Typography */
 h1 {

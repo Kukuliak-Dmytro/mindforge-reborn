@@ -29,7 +29,7 @@ export const EmployeeCard = ({
   onUnsave
 }: IEmployeeCardProps) => {
   return (
-    <div className="grid gap-4 bg-white-bg shadow-double rounded-medium p-6">
+    <div className="grid gap-4 bg-background shadow-double rounded-medium p-6">
       <div className="flex gap-4 items-center">
         {customAvatar || (avatarId && <Avatar id={avatarId} size={80} />)}
         <div className="w-full grid gap-3">

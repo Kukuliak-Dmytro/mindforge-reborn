@@ -18,7 +18,7 @@ export const SubjectSnippet: FC<ISubjectSnippetProps> = ({
   return (
     <div 
       className={cn(
-        "h-[35px] w-auto px-[10px] rounded-small shadow-small bg-white-bg",
+        "h-[35px] w-auto px-[10px] rounded-small shadow-small bg-background",
         "flex justify-between items-center",
         variant === 'Inverse' ? 'flex-row-reverse' : 'flex-row'
       )}

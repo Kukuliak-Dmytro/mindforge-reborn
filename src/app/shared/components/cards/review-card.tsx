@@ -20,7 +20,7 @@ export const ReviewCard = ({
   customAvatar 
 }: IReviewCardProps) => {
   return (
-    <div className="flex items-center gap-6 p-6 bg-white-bg rounded-medium shadow-double">
+    <div className="flex items-center gap-6 p-6 bg-background rounded-medium shadow-double">
       {customAvatar || (avatarId && <Avatar id={avatarId} size={80} />)}
       
       <div className="flex flex-col gap-2">

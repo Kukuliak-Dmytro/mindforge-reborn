@@ -51,13 +51,14 @@ export const LoginModule = () => {
   //return
   return (
     <div
-      className="max-w-xl w-full space-y-8 p-8 bg-white-fg rounded-medium
+      className="max-w-xl w-full space-y-8 p-8 bg-foreground rounded-medium
         shadow-double">
       <div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-rich-black">
+        <h2
+          className="mt-6 text-center text-3xl font-extrabold text-primary-text">
           {t("auth_login_title")}
         </h2>
-        <p className="mt-2 text-center text-sm text-dark-gray">
+        <p className="mt-2 text-center text-sm text-secondary-text">
           {t("auth_or")}{" "}
           <Link
             href="/register"

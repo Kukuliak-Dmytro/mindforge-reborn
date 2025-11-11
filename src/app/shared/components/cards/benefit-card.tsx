@@ -14,16 +14,16 @@ export const BenefitCard: FC<IBenefitCardProps> = ({
   color = "default",
 }) => {
   const COLOR_CLASSES = {
-    primary: "bg-primary text-rich-black",
-    secondary: "bg-secondary text-rich-black",
-    accent: "bg-accent text-rich-black",
-    default: "bg-white-bg text-rich-black",
+    primary: "bg-primary text-primary-text",
+    secondary: "bg-secondary text-primary-text",
+    accent: "bg-accent text-primary-text",
+    default: "bg-background text-primary-text",
   };
 
   return (
     <div
       className={cn(
-        "h-[700px] w-[316px] border-t-8 border-dark-gray rounded-b-[316px]",
+        "h-[700px] w-[316px] border-t-8 border-secondary-text rounded-b-[316px]",
         "flex flex-col gap-6 overflow-hidden",
         COLOR_CLASSES[color],
       )}>

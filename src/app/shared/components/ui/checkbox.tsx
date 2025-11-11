@@ -32,7 +32,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       <div
         className={cn(
           `p-2 flex flex-row-reverse gap-4 items-center justify-between
-          bg-white-bg rounded-medium shadow-small cursor-pointer`,
+          bg-background rounded-medium shadow-small cursor-pointer`,
           className,
         )}
         onClick={handleClick}
@@ -53,7 +53,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             className={cn(
               `w-5 h-5 transition-colors rounded-md border
               border-primary-border`,
-              "bg-white-bg peer-checked:bg-accent",
+              "bg-background peer-checked:bg-accent",
             )}
           />
           <svg

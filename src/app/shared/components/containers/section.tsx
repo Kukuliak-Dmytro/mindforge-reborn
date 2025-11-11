@@ -9,10 +9,10 @@ interface SectionProps {
 export function Section({ title, children, className }: SectionProps) {
   return (
     <section className="flex flex-col">
-      {title && <h3 className="text-rich-black">{title}</h3>}
+      {title && <h3 className="text-primary-text">{title}</h3>}
       <div
         className={cn(
-          "w-[1240px] p-[60px] bg-white-fg shadow-double rounded-large",
+          "w-[1240px] p-[60px] bg-foreground shadow-double rounded-large",
           title ? "mt-4" : "mt-[60px]",
           className,
         )}>

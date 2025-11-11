@@ -350,7 +350,7 @@ export default function Home() {
       <Section>
         <div
           className="flex flex-col md:flex-row justify-between items-center
-            border-b-2 border-dark-gray py-6">
+            border-b-2 border-secondary-text py-6">
           <h2>Куй знання, змінюй майбутнє</h2>
           <Button variant="primary" size="large" href="/orders/create">
             Створити замовлення

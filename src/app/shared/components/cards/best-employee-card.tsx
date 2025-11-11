@@ -19,7 +19,7 @@ export const BestEmployeeCard: FC<IBestEmployeeCardProps> = ({
   return (
     <div
       className={cn(
-        `bg-white-bg p-6 flex flex-col items-center gap-4 text-center
+        `bg-background p-6 flex flex-col items-center gap-4 text-center
         shadow-medium rounded-small`,
       )}>
       {children}

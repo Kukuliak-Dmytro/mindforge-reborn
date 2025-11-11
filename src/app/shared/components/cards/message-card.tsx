@@ -9,7 +9,7 @@ export const MessageCard = ({ sender }: IMessageCardProps) => {
   return (
     <div
       className={
-        "bg-white-bg p-4 border-4 " +
+        "bg-background p-4 border-4 " +
         messageClass +
         " rounded-medium text-left w-full flex gap-2 items-end"
       }>

@@ -14,10 +14,10 @@
   --color-secondary: hsl(45, 100%, 55%);
   --color-accent: hsl(173, 55%, 74%);
   --color-danger: hsl(5, 75%, 57%);
-  --color-white-bg: hsl(60, 40%, 98%);
-  --color-white-fg: hsl(60, 43%, 96%);
-  --color-rich-black: #0b0702;
-  --color-dark-gray: hsl(0, 0%, 22%);
+  --color-background: hsl(60, 40%, 98%);
+  --color-foreground: hsl(60, 43%, 96%);
+  --color-primary-text: #0b0702;
+  --color-secondary-text: hsl(0, 0%, 22%);
 
   --shadow-small: 0px 2px 2px 0 rgba(0, 0, 0, 0.2);
   --shadow-medium: 0px 4px 4px 0 rgba(0, 0, 0, 0.2);
@@ -29,10 +29,10 @@
   --color-secondary: hsl(45, 100%, 45%);
   --color-accent: hsl(173, 55%, 26%);
   --color-danger: hsl(5, 75%, 45%);
-  --color-white-bg: hsl(60, 40%, 2%);
-  --color-white-fg: hsl(60, 43%, 4%);
-  --color-rich-black: hsl(33, 69%, 97%);
-  --color-dark-gray: hsl(0, 0%, 78%);
+  --color-background: hsl(60, 40%, 2%);
+  --color-foreground: hsl(60, 43%, 4%);
+  --color-primary-text: hsl(33, 69%, 97%);
+  --color-secondary-text: hsl(0, 0%, 78%);
 
   --shadow-small: 0px 2px 4px 0 rgba(96, 96, 96);
   --shadow-medium: 0px 4px 8px 0 rgb(96, 96, 96);

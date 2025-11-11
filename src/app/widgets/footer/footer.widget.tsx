@@ -11,9 +11,9 @@ export const FooterComponent = () => {
   return (
     <footer
       className="w-full h-auto flex justify-center flex-col items-center
-        bg-gradient-to-t from-white-bg to-white-fg">
+        bg-gradient-to-t from-background to-foreground">
       {/* Divider line */}
-      <div className="h-[60px] bg-white-bg w-full border-b-2 border-black"></div>
+      <div className="h-[60px] bg-background w-full border-b-2 border-black"></div>
 
       {/* Footer content */}
       <div
@@ -21,7 +21,7 @@ export const FooterComponent = () => {
           py-[60px]">
         {/* Brand column */}
         <div className="flex flex-col gap-4">
-          <h2 className="text-rich-black">MindForge</h2>
+          <h2 className="text-primary-text">MindForge</h2>
           <span className="flex items-center gap-4">
             <a href="#" className="transition-all">
               <FaFacebook

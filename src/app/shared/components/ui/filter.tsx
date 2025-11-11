@@ -26,7 +26,7 @@ export function Filter({
   return (
     <div
       className={cn(
-        "p-6 min-w-[300px] bg-white-fg shadow-double rounded-medium mb-4",
+        "p-6 min-w-[300px] bg-foreground shadow-double rounded-medium mb-4",
         className,
       )}>
       <h4 className="text-primary mb-3">{title}</h4>

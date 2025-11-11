@@ -14,7 +14,7 @@ export const HeaderComponent = () => {
     <header
       className={cn(
         "relative z-10 w-full h-[80px] flex justify-center items-center",
-        "bg-gradient-to-b from-white-bg to-white-fg shadow-small",
+        "bg-gradient-to-b from-background to-foreground shadow-small",
       )}>
       <div className="flex justify-between max-w-[1240px] w-full px-4">
         {/* Left side */}
@@ -48,17 +48,17 @@ export const HeaderComponent = () => {
               aria-label="Toggle menu">
               <span
                 className={cn(
-                  "block w-6 h-[3px] bg-rich-black rounded-[3px]",
+                  "block w-6 h-[3px] bg-primary-text rounded-[3px]",
                   "transition-transform duration-300",
                 )}></span>
               <span
                 className={cn(
-                  "block w-6 h-[3px] bg-rich-black rounded-[3px]",
+                  "block w-6 h-[3px] bg-primary-text rounded-[3px]",
                   "transition-opacity duration-300",
                 )}></span>
               <span
                 className={cn(
-                  "block w-6 h-[3px] bg-rich-black rounded-[3px]",
+                  "block w-6 h-[3px] bg-primary-text rounded-[3px]",
                   "transition-transform duration-300",
                 )}></span>
             </button>
@@ -66,7 +66,7 @@ export const HeaderComponent = () => {
             <div
               data-menu-content
               className={cn(
-                "absolute top-full right-0 mt-2 w-[225px] bg-white-fg",
+                "absolute top-full right-0 mt-2 w-[225px] bg-foreground",
                 "rounded-medium shadow-double p-4 border-none text-right z-50",
                 `origin-top-right transition-all duration-200 ease-out
                 transform`,

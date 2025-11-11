@@ -30,7 +30,7 @@ function PopoverContent({
         align={align}
         sideOffset={sideOffset}
         className={cn(
-          `bg-white-fg text-popover-foreground z-50 w-72 rounded-md border p-4
+          `bg-foreground text-popover-foreground z-50 w-72 rounded-md border p-4
           shadow-md outline-hidden
           origin-[var(--radix-popover-content-transform-origin)]`,
           "popover-content",
