@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useFormState } from "@/app/shared/hooks/use-form-state"
-import { InputText } from "@/app/shared/components/ui/input-text"
-import { PrimaryButton } from "@/app/shared/components/ui/button"
+import { useState } from "react";
+import { useFormState } from "@/app/shared/hooks/use-form-state";
+import { InputText } from "@/app/shared/components/ui/input-text";
+import { PrimaryButton } from "@/app/shared/components/ui/button";
 
-interface FormData {
+interface ExampleFormData extends Record<string, unknown> {
   firstName: string;
   lastName: string;
   email: string;
@@ -13,30 +13,30 @@ interface FormData {
 }
 
 export function FormExample() {
-  const { formState, handleChange, resetForm } = useFormState<FormData>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: ''
+  const { formState, handleChange, resetForm } = useFormState<ExampleFormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
   });
-  
+
   const [submitted, setSubmitted] = useState(false);
-  
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    console.log('Form submitted:', formState);
+    console.log("Form submitted:", formState);
   };
-  
+
   const handleReset = () => {
     resetForm();
     setSubmitted(false);
   };
-  
+
   return (
     <div className="bg-white-bg rounded-medium shadow-small p-6">
       <h4 className="text-primary mb-4">Form Example with useFormState</h4>
-      
+
       {submitted ? (
         <div className="space-y-4">
           <div className="p-4 bg-accent/10 rounded-medium">
@@ -56,7 +56,7 @@ export function FormExample() {
             value={formState.firstName}
             onChange={handleChange}
           />
-          
+
           <InputText
             id="lastName"
             title="Last Name"
@@ -64,7 +64,7 @@ export function FormExample() {
             value={formState.lastName}
             onChange={handleChange}
           />
-          
+
           <InputText
             id="email"
             title="Email"
@@ -73,7 +73,7 @@ export function FormExample() {
             value={formState.email}
             onChange={handleChange}
           />
-          
+
           <InputText
             id="phone"
             title="Phone"
@@ -82,18 +82,15 @@ export function FormExample() {
             value={formState.phone}
             onChange={handleChange}
           />
-          
+
           <div className="flex gap-4 pt-2">
             <PrimaryButton type="submit">Submit</PrimaryButton>
-            <PrimaryButton 
-              type="button" 
-              onClick={handleReset}
-            >
+            <PrimaryButton type="button" onClick={handleReset}>
               Reset
             </PrimaryButton>
           </div>
         </form>
       )}
     </div>
-  )
-} 
+  );
+}

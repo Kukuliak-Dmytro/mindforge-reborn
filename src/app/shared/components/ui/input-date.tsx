@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { cn } from "@/app/shared/utils/utils"
+import * as React from "react";
+import { cn } from "@/app/shared/utils/utils";
 
 export interface InputDateProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -16,13 +16,23 @@ export interface InputDateProps
 }
 
 const InputDate = React.forwardRef<HTMLInputElement, InputDateProps>(
-  ({ title, id, placeholder, value, defaultValue, className, onChange, readOnly, ...props }, ref) => {
+  (
+    {
+      title,
+      id,
+      placeholder,
+      value,
+      defaultValue,
+      className,
+      onChange,
+      readOnly,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div className="flex flex-col gap-1">
-        <label 
-          htmlFor={id} 
-          className={`pl-4 `}
-        >
+        <label htmlFor={id} className={"pl-4 "}>
           {title}
         </label>
         <input
@@ -36,18 +46,19 @@ const InputDate = React.forwardRef<HTMLInputElement, InputDateProps>(
           readOnly={readOnly}
           className={cn(
             "h-[50px] rounded-medium px-4 text-base",
-            readOnly 
-              ? "cursor-default outline-none border-none" 
-              : "border border-primary-border shadow-small focus:outline-none focus:ring-2 focus:ring-accent",
-            className
+            readOnly
+              ? "cursor-default outline-none border-none"
+              : `border border-primary-border shadow-small focus:outline-none
+                focus:ring-2 focus:ring-accent`,
+            className,
           )}
           {...props}
         />
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-InputDate.displayName = "InputDate"
+InputDate.displayName = "InputDate";
 
-export { InputDate } 
+export { InputDate };

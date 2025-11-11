@@ -13,7 +13,3 @@ export const quicksand = Quicksand({
   adjustFontFallback: true,
   variable: "--font-quicksand",
 });
-
-
-
-

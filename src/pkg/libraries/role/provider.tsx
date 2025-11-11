@@ -83,6 +83,3 @@ export const useIsTutor = (): boolean => {
 export const useIsAdmin = (): boolean => {
   return useHasRole("ADMIN");
 };
-
-
-

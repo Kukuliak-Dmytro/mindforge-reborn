@@ -16,15 +16,9 @@ export const envServer = createEnv({
     // BETTER_AUTH_SECRET: z
     //   .string()
     //   .min(1, { message: "BETTER_AUTH_SECRET is required" }),
-    GROWTHBOOK_CLIENT_KEY: z
-      .string()
-      .optional(),
-    GROWTHBOOK_API_HOST: z
-      .string()
-      .optional(),
-    GROWTHBOOK_APP_ORIGIN: z
-      .string()
-      .optional(),
+    GROWTHBOOK_CLIENT_KEY: z.string().optional(),
+    GROWTHBOOK_API_HOST: z.string().optional(),
+    GROWTHBOOK_APP_ORIGIN: z.string().optional(),
   },
   emptyStringAsUndefined: true,
   runtimeEnv: {

@@ -17,7 +17,7 @@ The middleware operates as a **request interceptor** that processes all incoming
 ### High-Level Flow
 
 ```
-Request → Auth Route Check → Session Validation → Role Extraction → 
+Request → Auth Route Check → Session Validation → Role Extraction →
 Locale Extraction → Role-Based Protection → i18n Routing → Response
 ```
 
@@ -121,7 +121,7 @@ IF role === "TUTOR" THEN
         Construct tutor home path (locale-aware)
         RETURN redirect to tutor home
     END IF
-    
+
     IF isStudentOnlyRoute(pathnameWithoutLocale) THEN
         // Check student-only routes: /catalog, /orders, /saved, /chats, /profile
         Extract locale from request
@@ -134,6 +134,7 @@ END IF
 **Purpose:** Prevents tutors from accessing student-only routes.
 
 **Student-Only Routes:**
+
 - `/` (root/home)
 - `/catalog`
 - `/orders`
@@ -142,6 +143,7 @@ END IF
 - `/profile`
 
 **Tutor-Only Routes:**
+
 - `/tutor` (tutor home)
 - `/tutor/orders`
 - `/tutor/saved`
@@ -261,25 +263,27 @@ END IF
 **Problem:** Extract the base pathname without locale prefix for role-based checks.
 
 **Solution:**
+
 ```typescript
 function extractPathnameWithoutLocale(pathname: string): string {
-    let pathnameWithoutLocale = pathname;
-    
-    for (const locale of routing.locales) {
-        if (pathname.startsWith(`/${locale}/`)) {
-            pathnameWithoutLocale = pathname.slice(`/${locale}`.length);
-            break;
-        } else if (pathname === `/${locale}`) {
-            pathnameWithoutLocale = "/";
-            break;
-        }
+  let pathnameWithoutLocale = pathname;
+
+  for (const locale of routing.locales) {
+    if (pathname.startsWith(`/${locale}/`)) {
+      pathnameWithoutLocale = pathname.slice(`/${locale}`.length);
+      break;
+    } else if (pathname === `/${locale}`) {
+      pathnameWithoutLocale = "/";
+      break;
     }
-    
-    return pathnameWithoutLocale;
+  }
+
+  return pathnameWithoutLocale;
 }
 ```
 
 **Examples:**
+
 - `/en/catalog` → `/catalog`
 - `/uk/tutor` → `/tutor`
 - `/en` → `/`
@@ -290,29 +294,33 @@ function extractPathnameWithoutLocale(pathname: string): string {
 **Problem:** Prevent unauthorized role access to protected routes.
 
 **Solution:**
+
 ```typescript
-function protectRoutesByRole(role: UserRole, pathname: string): NextResponse | null {
-    // Tutor route protection
-    if (pathname.startsWith("/tutor")) {
-        if (role !== "TUTOR") {
-            return redirectToStudentHome();
-        }
+function protectRoutesByRole(
+  role: UserRole,
+  pathname: string,
+): NextResponse | null {
+  // Tutor route protection
+  if (pathname.startsWith("/tutor")) {
+    if (role !== "TUTOR") {
+      return redirectToStudentHome();
     }
-    
-    // Student route protection
-    if (role === "TUTOR") {
-        // Protect root "/" (student home)
-        if (pathname === "/") {
-            return redirectToTutorHome();
-        }
-        
-        // Protect other student-only routes
-        if (isStudentOnlyRoute(pathname)) {
-            return redirectToTutorHome();
-        }
+  }
+
+  // Student route protection
+  if (role === "TUTOR") {
+    // Protect root "/" (student home)
+    if (pathname === "/") {
+      return redirectToTutorHome();
     }
-    
-    return null; // Allow access
+
+    // Protect other student-only routes
+    if (isStudentOnlyRoute(pathname)) {
+      return redirectToTutorHome();
+    }
+  }
+
+  return null; // Allow access
 }
 ```
 
@@ -321,16 +329,18 @@ function protectRoutesByRole(role: UserRole, pathname: string): NextResponse | n
 **Problem:** Generate redirects that preserve or respect locale preferences.
 
 **Solution:**
+
 ```typescript
 function getLocaleAwarePath(basePath: string, locale: string): string {
-    if (locale === routing.defaultLocale) {
-        return basePath;
-    }
-    return `/${locale}${basePath}`;
+  if (locale === routing.defaultLocale) {
+    return basePath;
+  }
+  return `/${locale}${basePath}`;
 }
 ```
 
 **Examples:**
+
 - Default locale: `/tutor` → `/tutor`
 - Non-default locale: `/tutor` → `/uk/tutor`
 - Default locale: `/` → `/`
@@ -343,6 +353,7 @@ function getLocaleAwarePath(basePath: string, locale: string): string {
 **Scenario:** Session exists but role is not present.
 
 **Handling:**
+
 ```typescript
 const role = userRole || "STUDENT"; // Default to STUDENT
 ```
@@ -354,9 +365,10 @@ const role = userRole || "STUDENT"; // Default to STUDENT
 **Scenario:** User accesses `/{locale}` (e.g., `/en` or `/uk`).
 
 **Handling:**
+
 ```typescript
 if (pathname === `/${locale}`) {
-    pathnameWithoutLocale = "/";
+  pathnameWithoutLocale = "/";
 }
 ```
 
@@ -367,13 +379,13 @@ if (pathname === `/${locale}`) {
 **Scenario:** User tries to access protected route without session.
 
 **Handling:**
+
 ```typescript
 if (!session) {
-    const locale = getLocaleFromRequest(request);
-    const loginPath = locale === routing.defaultLocale 
-        ? "/login" 
-        : `/${locale}/login`;
-    return NextResponse.redirect(new URL(loginPath, request.url));
+  const locale = getLocaleFromRequest(request);
+  const loginPath =
+    locale === routing.defaultLocale ? "/login" : `/${locale}/login`;
+  return NextResponse.redirect(new URL(loginPath, request.url));
 }
 ```
 
@@ -384,6 +396,7 @@ if (!session) {
 **Scenario:** User with role X tries to access role Y's routes.
 
 **Handling:**
+
 - Tutor accessing student routes → Redirect to `/tutor`
 - Student accessing tutor routes → Redirect to `/`
 
@@ -394,6 +407,7 @@ if (!session) {
 ### 1. Early Returns
 
 The middleware uses early returns to avoid unnecessary processing:
+
 - Auth routes skip authentication
 - Missing sessions redirect immediately
 - Role mismatches redirect immediately
@@ -401,9 +415,10 @@ The middleware uses early returns to avoid unnecessary processing:
 ### 2. Cookie Management
 
 User ID cookie is only updated when necessary:
+
 ```typescript
 if (existingUserId !== userId) {
-    // Update cookie
+  // Update cookie
 }
 ```
 
@@ -436,55 +451,57 @@ Locale is extracted from cookies (fast) rather than parsing pathname multiple ti
 ### Matcher Pattern
 
 ```typescript
-matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"]
+matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"];
 ```
 
 **Excludes:**
+
 - `/api/*` - API routes
 - `/_next/*` - Next.js internals
 - `/_vercel/*` - Vercel routes
 - `*.*` - Static files (anything with a dot)
 
 **Includes:**
+
 - All other routes (application routes)
 
 ## Testing Scenarios
 
 ### 1. Student Access Tests
 
-| Route | Expected Behavior |
-|-------|------------------|
-| `/` | ✅ Allow |
-| `/catalog` | ✅ Allow |
-| `/tutor` | ❌ Redirect to `/` |
+| Route           | Expected Behavior  |
+| --------------- | ------------------ |
+| `/`             | ✅ Allow           |
+| `/catalog`      | ✅ Allow           |
+| `/tutor`        | ❌ Redirect to `/` |
 | `/tutor/orders` | ❌ Redirect to `/` |
 
 ### 2. Tutor Access Tests
 
-| Route | Expected Behavior |
-|-------|------------------|
-| `/` | ❌ Redirect to `/tutor` |
-| `/catalog` | ❌ Redirect to `/tutor` |
-| `/tutor` | ✅ Allow |
-| `/tutor/orders` | ✅ Allow |
+| Route           | Expected Behavior       |
+| --------------- | ----------------------- |
+| `/`             | ❌ Redirect to `/tutor` |
+| `/catalog`      | ❌ Redirect to `/tutor` |
+| `/tutor`        | ✅ Allow                |
+| `/tutor/orders` | ✅ Allow                |
 
 ### 3. Unauthenticated Access Tests
 
-| Route | Expected Behavior |
-|-------|------------------|
-| `/` | ❌ Redirect to `/login` |
-| `/tutor` | ❌ Redirect to `/login` |
-| `/login` | ✅ Allow |
-| `/register` | ✅ Allow |
+| Route       | Expected Behavior       |
+| ----------- | ----------------------- |
+| `/`         | ❌ Redirect to `/login` |
+| `/tutor`    | ❌ Redirect to `/login` |
+| `/login`    | ✅ Allow                |
+| `/register` | ✅ Allow                |
 
 ### 4. Locale-Aware Tests
 
-| Route | Expected Behavior |
-|-------|------------------|
-| `/en/catalog` | ✅ Allow (student) |
-| `/uk/tutor` | ✅ Allow (tutor) |
-| `/en/tutor` (as student) | ❌ Redirect to `/en` |
-| `/uk/` (as tutor) | ❌ Redirect to `/uk/tutor` |
+| Route                    | Expected Behavior          |
+| ------------------------ | -------------------------- |
+| `/en/catalog`            | ✅ Allow (student)         |
+| `/uk/tutor`              | ✅ Allow (tutor)           |
+| `/en/tutor` (as student) | ❌ Redirect to `/en`       |
+| `/uk/` (as tutor)        | ❌ Redirect to `/uk/tutor` |
 
 ## Dependencies
 
@@ -506,7 +523,3 @@ matcher: ["/((?!api|_next|_vercel|.*\\..*).*)"]
 3. **Audit Logging** - Log unauthorized access attempts
 4. **Rate Limiting** - Add rate limiting for authentication attempts
 5. **Caching** - Cache session lookups for performance
-
-
-
-

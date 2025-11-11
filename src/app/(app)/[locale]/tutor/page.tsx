@@ -33,23 +33,24 @@ export const TutorPage = async (props: IProps) => {
 
   //return
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8 p-8">
+    <div
+      className="flex min-h-screen flex-col items-center justify-center gap-8
+        p-8">
       <div className="flex flex-col gap-4 text-center">
-        <h1 className="text-4xl font-bold text-rich-black">
-          Tutor Dashboard
-        </h1>
-        <p className="text-lg text-gray-600">
-          This is the tutor-only page
-        </p>
+        <h1 className="text-4xl font-bold text-rich-black">Tutor Dashboard</h1>
+        <p className="text-lg text-gray-600">This is the tutor-only page</p>
       </div>
 
       {/* Role Information for Testing */}
-      <div className="rounded-lg border-2 border-secondary bg-white p-6 shadow-md">
+      <div
+        className="rounded-lg border-2 border-secondary bg-white p-6 shadow-md">
         <h2 className="mb-4 text-2xl font-semibold">Role Information</h2>
         <div className="space-y-2">
           <div>
             <span className="font-semibold">Role:</span>{" "}
-            <span className="text-secondary">{role || "Not authenticated"}</span>
+            <span className="text-secondary">
+              {role || "Not authenticated"}
+            </span>
           </div>
           {session && (
             <>
@@ -82,4 +83,3 @@ export const TutorPage = async (props: IProps) => {
 };
 
 export default TutorPage;
-

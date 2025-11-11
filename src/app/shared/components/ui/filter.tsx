@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { Checkbox } from "@/app/shared/components/ui/checkbox"
-import { cn } from "@/app/shared/utils/utils"
+import { Checkbox } from "@/app/shared/components/ui/checkbox";
+import { cn } from "@/app/shared/utils/utils";
 
 export interface FilterItem {
   code: string;
@@ -16,12 +16,19 @@ export interface FilterProps {
   onFilterChange?: (filter: string, checked: boolean) => void;
 }
 
-export function Filter({ title, filters, selectedFilters = [], className, onFilterChange }: FilterProps) {
+export function Filter({
+  title,
+  filters,
+  selectedFilters = [],
+  className,
+  onFilterChange,
+}: FilterProps) {
   return (
-    <div className={cn(
-      "p-6 min-w-[300px] bg-white-fg shadow-double rounded-medium mb-4",
-      className
-    )}>
+    <div
+      className={cn(
+        "p-6 min-w-[300px] bg-white-fg shadow-double rounded-medium mb-4",
+        className,
+      )}>
       <h4 className="text-primary mb-3">{title}</h4>
       <div className="grid gap-2">
         {filters.map((filter, index) => (
@@ -35,5 +42,5 @@ export function Filter({ title, filters, selectedFilters = [], className, onFilt
         ))}
       </div>
     </div>
-  )
-} 
+  );
+}

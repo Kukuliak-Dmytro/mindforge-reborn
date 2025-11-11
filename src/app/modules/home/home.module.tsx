@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/pkg/libraries/locale";
-import { cn } from "@/app/shared/utils/utils";
+import { useTranslations } from "next-intl";
 import { Button } from "@/app/shared/components/ui/button";
 import * as Sentry from "@sentry/nextjs";
 import { authClient } from "@/pkg/libraries/better-auth/auth-client";
@@ -14,7 +12,6 @@ import { authClient } from "@/pkg/libraries/better-auth/auth-client";
  */
 export const HomeModule = () => {
   const t = useTranslations();
-  const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
   const { data: session } = authClient.useSession();
 

@@ -13,7 +13,3 @@ export const getRoleFromServer = async (): Promise<UserRole | null> => {
   const headersList = await headers();
   return getRole(headersList);
 };
-
-
-
-

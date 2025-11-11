@@ -12,7 +12,8 @@ const buttonVariants = cva(
         primary: "bg-primary text-rich-black",
         secondary: "bg-secondary text-rich-black",
         danger: "bg-danger text-rich-black",
-        outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         ghost: "bg-transparent hover:bg-accent hover:text-accent-foreground",
       },
       size: {
@@ -25,7 +26,7 @@ const buttonVariants = cva(
       variant: "primary",
       size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
@@ -51,44 +52,41 @@ export function Button({
 
   if (href) {
     return (
-      <Link 
-        href={href} 
-        className={styles} 
-        style={{ 
-          ...(width ? { width: `${width}px` } : {}), 
-          ...(height ? { height: `${height}px` } : {}) 
-        }}
-      >
+      <Link
+        href={href}
+        className={styles}
+        style={{
+          ...(width ? { width: `${width}px` } : {}),
+          ...(height ? { height: `${height}px` } : {}),
+        }}>
         {children}
       </Link>
     );
   }
 
   return (
-    <button 
-      className={styles} 
-      style={{ 
-        ...(width ? { width: `${width}px` } : {}), 
-        ...(height ? { height: `${height}px` } : {}) 
+    <button
+      className={styles}
+      style={{
+        ...(width ? { width: `${width}px` } : {}),
+        ...(height ? { height: `${height}px` } : {}),
       }}
-      
-      {...props}
-    >
+      {...props}>
       {children}
     </button>
   );
 }
 
 // Convenience components for the different variants
-export function PrimaryButton(props: Omit<ButtonProps, 'variant'>) {
+export function PrimaryButton(props: Omit<ButtonProps, "variant">) {
   return <Button variant="primary" {...props} />;
 }
 
-export function SecondaryButton(props: Omit<ButtonProps, 'variant'>) {
+export function SecondaryButton(props: Omit<ButtonProps, "variant">) {
   return <Button variant="secondary" {...props} />;
 }
 
-export function DangerButton(props: Omit<ButtonProps, 'variant'>) {
+export function DangerButton(props: Omit<ButtonProps, "variant">) {
   return <Button variant="danger" {...props} />;
 }
 

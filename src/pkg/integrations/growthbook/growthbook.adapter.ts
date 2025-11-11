@@ -5,13 +5,14 @@ import { envServer } from "@/config/env";
 import { USER_ID_COOKIE } from "@/proxy";
 
 // growthbook
-const gb = envServer.GROWTHBOOK_API_HOST && envServer.GROWTHBOOK_CLIENT_KEY
-  ? new GrowthBook({
-      apiHost: envServer.GROWTHBOOK_API_HOST,
-      clientKey: envServer.GROWTHBOOK_CLIENT_KEY,
-      enableDevMode: process.env.NODE_ENV !== "production",
-    })
-  : null;
+const gb =
+  envServer.GROWTHBOOK_API_HOST && envServer.GROWTHBOOK_CLIENT_KEY
+    ? new GrowthBook({
+        apiHost: envServer.GROWTHBOOK_API_HOST,
+        clientKey: envServer.GROWTHBOOK_CLIENT_KEY,
+        enableDevMode: process.env.NODE_ENV !== "production",
+      })
+    : null;
 
 let initialized = false;
 
@@ -37,7 +38,7 @@ export const getFeatureValue = async <T>(
   attributes: Record<string, unknown>,
 ): Promise<T> => {
   if (!gb) return defaultValue;
-  
+
   await ensureInitialized();
 
   // Read user ID from cookies (server-side) for GrowthBook experiment hashing

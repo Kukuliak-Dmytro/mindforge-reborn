@@ -13,7 +13,3 @@ export const comfortaa = Comfortaa({
   adjustFontFallback: true,
   variable: "--font-comfortaa",
 });
-
-
-
-

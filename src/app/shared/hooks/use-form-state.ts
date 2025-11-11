@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent } from "react";
 
 /**
  * Custom hook to manage form state.
@@ -11,34 +11,40 @@ import { useState, ChangeEvent } from 'react';
  *
  * @example
  * const [formState, handleChange] = useFormState({ name: '', email: '' });
- * 
+ *
  * // Automatic update of form state:
  * <input id="name" value={formState.name} onChange={handleChange} />
  * <input id="email" value={formState.email} onChange={handleChange} />
- * 
+ *
  * // Manual update of form state:
- * handleChange({ target: { value: 'new value', id: 'fieldId' } } as any);
+ * handleChange({ target: { value: 'new value', id: 'fieldId' } } as ChangeEvent<HTMLInputElement>);
  */
-export function useFormState<T extends Record<string, any>>(initialState: T) {
+export function useFormState<T extends Record<string, unknown>>(
+  initialState: T,
+) {
   const [formState, setFormState] = useState<T>(initialState);
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    event: ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
+  ) => {
     const { id, name, value } = event.target;
     const key = name || id; // Use name if provided, otherwise use id
 
     setFormState((prev) => ({
       ...prev,
-      [key]: value
+      [key]: value,
     }));
   };
 
   /**
    * Manually update a single field in the form state
    */
-  const updateField = (fieldName: keyof T, value: any) => {
+  const updateField = (fieldName: keyof T, value: T[keyof T]) => {
     setFormState((prev) => ({
       ...prev,
-      [fieldName]: value
+      [fieldName]: value,
     }));
   };
 
@@ -54,12 +60,6 @@ export function useFormState<T extends Record<string, any>>(initialState: T) {
     handleChange,
     updateField,
     resetForm,
-    setFormState
+    setFormState,
   };
 }
-
-
-
-
-
-

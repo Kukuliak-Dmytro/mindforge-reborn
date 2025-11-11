@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { cn } from "@/app/shared/utils/utils"
+import * as React from "react";
+import { cn } from "@/app/shared/utils/utils";
 
 export interface InputTextProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -17,13 +17,24 @@ export interface InputTextProps
 }
 
 const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
-  ({ title, id, placeholder, value, defaultValue, type = "text", className, onChange, readOnly, ...props }, ref) => {
+  (
+    {
+      title,
+      id,
+      placeholder,
+      value,
+      defaultValue,
+      type = "text",
+      className,
+      onChange,
+      readOnly,
+      ...props
+    },
+    ref,
+  ) => {
     return (
       <div className="flex flex-col gap-1">
-        <label 
-          htmlFor={id} 
-          className={`pl-4 `}
-        >
+        <label htmlFor={id} className={"pl-4 "}>
           {title}
         </label>
         <input
@@ -37,18 +48,19 @@ const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
           readOnly={readOnly}
           className={cn(
             "h-[50px] rounded-medium px-4 text-base",
-            readOnly 
-              ? "cursor-default outline-none border-none" 
-              : "border border-primary-border shadow-small focus:outline-none focus:ring-2 focus:ring-accent",
-            className
+            readOnly
+              ? "cursor-default outline-none border-none"
+              : `border border-primary-border shadow-small focus:outline-none
+                focus:ring-2 focus:ring-accent`,
+            className,
           )}
           {...props}
         />
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
-InputText.displayName = "InputText"
+InputText.displayName = "InputText";
 
-export { InputText }
+export { InputText };
