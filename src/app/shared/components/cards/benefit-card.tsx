@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FC } from "react";
 import { cn } from "@/app/shared/utils/utils";
 
-interface IBenefitCardProps {
+export interface IBenefitCardProps {
   title: string;
   imgSrc: string;
   color?: "primary" | "secondary" | "accent" | "default";
@@ -40,3 +40,4 @@ export const BenefitCard: FC<IBenefitCardProps> = ({
     </div>
   );
 };
+

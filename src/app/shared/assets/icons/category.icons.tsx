@@ -1,7 +1,7 @@
 import { FC } from "react";
-
+import { ICategoryIconCode } from "@/app/shared/assets/icons/icon-codes.interface";
 interface ICategoryIconProps {
-  icon: "exam" | "tutoring" | "diploma" | "homework" | "difficulties";
+  icon: ICategoryIconCode;
   size?: number;
 }
 
@@ -66,7 +66,7 @@ export const CategoryIcon: FC<ICategoryIconProps> = ({ icon, size = 64 }) => {
         </svg>
       );
 
-    case "difficulties":
+    case "complex":
       return (
         <svg
           width={size}

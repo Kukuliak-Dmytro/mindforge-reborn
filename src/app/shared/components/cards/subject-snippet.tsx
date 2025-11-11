@@ -1,24 +1,11 @@
 import { FC } from "react";
-import { Icons } from "@/app/shared/assets/icons";
+import { CategoryIcon } from "@/app/shared/assets/icons";
+import { ICategoryIconCode } from "@/app/shared/interfaces";
 import { cn } from "@/app/shared/utils/utils";
 
-interface ISubjectSnippetProps {
+export interface ISubjectSnippetProps {
   title: string;
-  icon:
-    | "DT"
-    | "DR"
-    | "HW"
-    | "KR"
-    | "TT"
-    | "Ukr"
-    | "Mat"
-    | "Eng"
-    | "Bio"
-    | "Geo"
-    | "His"
-    | "Phy"
-    | "Che"
-    | "Inf";
+  icon: ICategoryIconCode;
   size?: number;
   variant?: "Default" | "Inverse";
 }
@@ -37,7 +24,7 @@ export const SubjectSnippet: FC<ISubjectSnippetProps> = ({
         variant === "Inverse" ? "flex-row-reverse" : "flex-row",
       )}>
       <div>
-        <Icons icon={icon} size={size} />
+        <CategoryIcon icon={icon} size={size} />
       </div>
       <div className={cn("py-[10px]")}>
         <p>{title}</p>
@@ -45,3 +32,4 @@ export const SubjectSnippet: FC<ISubjectSnippetProps> = ({
     </div>
   );
 };
+

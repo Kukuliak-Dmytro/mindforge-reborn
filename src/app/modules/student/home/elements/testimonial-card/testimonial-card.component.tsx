@@ -1,13 +1,14 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
+import { Avatar } from "@/app/shared/assets/avatars";
 import { cn } from "@/app/shared/utils/utils";
 
-interface ITestimonialCardProps {
+export interface ITestimonialCardProps {
   name: string;
   rating: string;
   subject: string;
   description: string;
   author: string;
-  children: ReactNode;
+  avatarId: 1 | 2 | 3 | 4 | 5 | 6;
 }
 
 export const TestimonialCard: FC<ITestimonialCardProps> = ({
@@ -16,7 +17,7 @@ export const TestimonialCard: FC<ITestimonialCardProps> = ({
   subject,
   description,
   author,
-  children,
+  avatarId,
 }) => {
   return (
     <div
@@ -25,7 +26,9 @@ export const TestimonialCard: FC<ITestimonialCardProps> = ({
         relative`,
       )}>
       <div className={cn("flex gap-3")}>
-        <div className={cn("avatar")}>{children}</div>
+        <div className={cn("avatar")}>
+          <Avatar id={avatarId} size={64} />
+        </div>
         <div className={cn("flex flex-col gap-2")}>
           <h5>{name}</h5>
           <p>{rating}</p>
@@ -49,3 +52,4 @@ export const TestimonialCard: FC<ITestimonialCardProps> = ({
     </div>
   );
 };
+

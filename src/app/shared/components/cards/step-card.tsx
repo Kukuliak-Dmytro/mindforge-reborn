@@ -1,11 +1,11 @@
 import { FC, ReactNode } from "react";
 import { cn } from "@/app/shared/utils/utils";
 
-interface IStepCardProps {
+export interface IStepCardProps {
   step: number;
   title: string;
   content: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const StepCard: FC<IStepCardProps> = ({

@@ -1,16 +1,7 @@
 import { FC } from "react";
-
+import { ISubjectIconCode } from "@/app/shared/assets/icons/icon-codes.interface";
 interface ISubjectIconProps {
-  icon:
-    | "geography"
-    | "english"
-    | "mathematics"
-    | "biology"
-    | "informatics"
-    | "physics"
-    | "ukrainian"
-    | "chemistry"
-    | "history";
+  icon: ISubjectIconCode;
   size?: number;
   color?: string;
 }
