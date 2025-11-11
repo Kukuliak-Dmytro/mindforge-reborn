@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { PrimaryButton, SecondaryButton } from "./button";
+import { Button } from "./button";
 
 const avatarImages = [
   "/assets/avatars/avatar-img-01.png",
@@ -67,10 +67,14 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = ({
         ))}
       </div>
       <div className="flex flex-col gap-2 mt-2">
-        <PrimaryButton onClick={() => onSave(avatarImages[selectedIndex])}>
+        <Button
+          variant="primary"
+          onClick={() => onSave(avatarImages[selectedIndex])}>
           Зберегти
-        </PrimaryButton>
-        <SecondaryButton onClick={onCancel}>Скасувати</SecondaryButton>
+        </Button>
+        <Button variant="secondary" onClick={onCancel}>
+          Скасувати
+        </Button>
       </div>
     </div>
   );

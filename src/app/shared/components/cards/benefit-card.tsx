@@ -40,4 +40,3 @@ export const BenefitCard: FC<IBenefitCardProps> = ({
     </div>
   );
 };
-

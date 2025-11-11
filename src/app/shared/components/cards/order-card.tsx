@@ -114,7 +114,7 @@ export const OrderCard = ({
               )}
             </Button>
             <Button variant="primary" href="/chats">
-              Зв'язатися
+              Зв&apos;язатися
             </Button>
           </div>
         </>

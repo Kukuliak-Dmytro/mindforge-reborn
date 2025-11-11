@@ -60,16 +60,8 @@ export const FlagIcon: FC<IFlagIconProps> = ({
             strokeWidth="4.8"
             strokeLinecap="round"
           />
-          <path
-            d="M36 0V72M0 36H72"
-            stroke="white"
-            strokeWidth="9.6"
-          />
-          <path
-            d="M36 0V72M0 36H72"
-            stroke="#C8102E"
-            strokeWidth="6"
-          />
+          <path d="M36 0V72M0 36H72" stroke="white" strokeWidth="9.6" />
+          <path d="M36 0V72M0 36H72" stroke="#C8102E" strokeWidth="6" />
         </svg>
       );
 
@@ -96,4 +88,3 @@ export const FlagIcon: FC<IFlagIconProps> = ({
       );
   }
 };
-

@@ -52,4 +52,3 @@ export const TestimonialCard: FC<ITestimonialCardProps> = ({
     </div>
   );
 };
-
