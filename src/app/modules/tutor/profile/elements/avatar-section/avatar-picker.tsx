@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { Button } from "./button";
+import { Button } from "@/app/shared/components/ui/button";
 
 //constant
 /**
@@ -59,6 +59,7 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = ({
           alt="Preview Avatar"
           width={140}
           height={140}
+          className="rounded-full"
         />
       </div>
       {/* Grid of selectable avatars: 3 columns, 2 rows */}

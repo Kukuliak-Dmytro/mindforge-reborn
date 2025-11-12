@@ -34,7 +34,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="flex flex-col w-full gap-1">
         {title && (
-          <label htmlFor={id} className="pl-4 pb-1">
+          <label htmlFor={id} className="pl-4">
             {title}
           </label>
         )}

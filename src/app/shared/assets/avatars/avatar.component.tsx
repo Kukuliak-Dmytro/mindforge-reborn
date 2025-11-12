@@ -15,6 +15,7 @@ export const Avatar: FC<IAvatarProps> = ({ id, size }) => {
           alt=""
           width={size || 40}
           height={size || 40}
+          className="rounded-full"
         />
       );
     case 2:
@@ -24,6 +25,7 @@ export const Avatar: FC<IAvatarProps> = ({ id, size }) => {
           alt=""
           width={size || 40}
           height={size || 40}
+          className="rounded-full"
         />
       );
     case 3:
@@ -33,6 +35,7 @@ export const Avatar: FC<IAvatarProps> = ({ id, size }) => {
           alt=""
           width={size || 40}
           height={size || 40}
+          className="rounded-full"
         />
       );
     case 4:
@@ -42,6 +45,7 @@ export const Avatar: FC<IAvatarProps> = ({ id, size }) => {
           alt=""
           width={size || 40}
           height={size || 40}
+          className="rounded-full"
         />
       );
     case 5:
@@ -51,6 +55,7 @@ export const Avatar: FC<IAvatarProps> = ({ id, size }) => {
           alt=""
           width={size || 40}
           height={size || 40}
+          className="rounded-full"
         />
       );
     case 6:
@@ -60,6 +65,7 @@ export const Avatar: FC<IAvatarProps> = ({ id, size }) => {
           alt=""
           width={size || 40}
           height={size || 40}
+          className="rounded-full"
         />
       );
     default:
@@ -69,6 +75,7 @@ export const Avatar: FC<IAvatarProps> = ({ id, size }) => {
           alt=""
           width={size || 40}
           height={size || 40}
+          className="rounded-full"
         />
       );
   }

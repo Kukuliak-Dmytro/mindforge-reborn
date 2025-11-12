@@ -44,7 +44,7 @@ export const updateTutorProfile = async (
   data: IUpdateTutorProfileData,
 ): Promise<ITutorProfile> => {
   //return
-  setTimeout(() => {}, 1000);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const response = await restApiFetcher
     .patch("tutor/profile", { json: data })
     .json<IApiResponse<ITutorProfile>>();

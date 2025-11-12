@@ -1,11 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Avatar } from "@/app/shared/assets/avatars";
 import { Button } from "@/app/shared/components/ui/button";
-import { AvatarPicker } from "@/app/shared/components/ui/avatar-picker";
+import { AvatarPicker } from "./avatar-picker";
 import { useUpdateTutorProfile } from "@/app/entities/api/tutor-profile";
-import { cn } from "@/app/shared/utils/utils";
 
 //interface
 /**
@@ -39,11 +38,30 @@ export const AvatarSection = ({
   isUpdating = false,
 }: IAvatarSectionProps) => {
   const [showAvatarPicker, setShowAvatarPicker] = useState(false);
+  const [displayedAvatarUrl, setDisplayedAvatarUrl] = useState<string | null>(
+    avatarUrl,
+  );
   const updateProfile = useUpdateTutorProfile();
 
-  const avatarId = useMemo(() => getAvatarIdFromPath(avatarUrl), [avatarUrl]);
+  // Sync displayed avatar with prop when it changes (e.g., after query refetch)
+  useEffect(() => {
+    setDisplayedAvatarUrl(avatarUrl);
+  }, [avatarUrl]);
+
+  const avatarId = useMemo(
+    () => getAvatarIdFromPath(displayedAvatarUrl),
+    [displayedAvatarUrl],
+  );
 
   const handleAvatarSave = (avatarPath: string) => {
+    // Skip update if avatar hasn't changed
+    if (avatarPath === avatarUrl) {
+      setShowAvatarPicker(false);
+      return;
+    }
+
+    // Optimistically update the displayed avatar immediately
+    setDisplayedAvatarUrl(avatarPath);
     updateProfile.mutate(
       { avatarUrl: avatarPath },
       {
@@ -51,6 +69,8 @@ export const AvatarSection = ({
           setShowAvatarPicker(false);
         },
         onError: (error) => {
+          // Revert to the prop value on error
+          setDisplayedAvatarUrl(avatarUrl);
           console.error("Error updating avatar:", error);
         },
       },
@@ -77,19 +97,6 @@ export const AvatarSection = ({
         <>
           <div className="relative">
             <Avatar id={avatarId} size={140} />
-            {isPending && (
-              <div
-                className={cn(
-                  "absolute inset-0 flex items-center justify-center",
-                  "bg-white/80 rounded-full backdrop-blur-sm",
-                )}>
-                <div
-                  className={cn(
-                    `animate-spin rounded-full h-6 w-6 border-b-2
-                      border-primary`,
-                  )}></div>
-              </div>
-            )}
           </div>
           <div className="flex flex-col gap-2">
             <Button

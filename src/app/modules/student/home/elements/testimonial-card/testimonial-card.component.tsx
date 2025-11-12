@@ -22,8 +22,8 @@ export const TestimonialCard: FC<ITestimonialCardProps> = ({
   return (
     <div
       className={cn(
-        `p-4 sm:p-6 bg-background shadow-medium rounded-medium flex flex-col gap-3 sm:gap-4
-        relative w-full`,
+        `p-4 sm:p-6 bg-background shadow-medium rounded-medium flex flex-col
+        gap-3 sm:gap-4 relative w-full`,
       )}>
       <div className={cn("flex gap-3")}>
         <div className={cn("avatar flex-shrink-0")}>
@@ -45,7 +45,8 @@ export const TestimonialCard: FC<ITestimonialCardProps> = ({
 
       <div
         className={cn(
-          "absolute right-0 bottom-4 sm:bottom-6 py-0 pl-2 pr-4 sm:pr-6 bg-accent rounded-l-[6px]",
+          `absolute right-0 bottom-4 sm:bottom-6 py-0 pl-2 pr-4 sm:pr-6
+          bg-accent rounded-l-[6px]`,
         )}>
         <p className={cn("p2 text-xs sm:text-sm")}>{author}</p>
       </div>
