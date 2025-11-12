@@ -63,17 +63,17 @@ export const getTutorHomeSteps = (
   t: TutorHomeTranslations,
 ): IStepCardProps[] => [
   {
-    step: 6,
+    step: 1,
     title: t("tutor_home.steps.step1_title"),
     content: t("tutor_home.steps.step1_content"),
   },
   {
-    step: 7,
+    step: 2,
     title: t("tutor_home.steps.step2_title"),
     content: t("tutor_home.steps.step2_content"),
   },
   {
-    step: 8,
+    step: 3,
     title: t("tutor_home.steps.step3_title"),
     content: t("tutor_home.steps.step3_content"),
   },

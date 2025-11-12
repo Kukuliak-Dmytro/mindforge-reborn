@@ -1,11 +1,10 @@
-// Type and utility exports
 export type { UserRole } from "./types";
 export { isStudentOnlyRoute } from "./types";
 
-// Middleware exports
 export {
   extractPathnameWithoutLocale,
-  extractRoleFromSession,
+  getUserRole,
   checkRouteAccess,
+  isPublicRoute,
 } from "./middleware";
-export type { RouteAccessResult } from "./middleware";
+export type { IRouteAccessResult } from "./middleware";

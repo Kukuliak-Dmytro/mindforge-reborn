@@ -1,1 +1,1 @@
-export { LocaleSwitcher } from "./locale-switcher.component";
+export { LocaleSwitcher, LocaleSwitcherMenuItem } from "./locale-switcher.component";

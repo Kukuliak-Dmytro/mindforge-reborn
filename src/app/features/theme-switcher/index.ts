@@ -1,1 +1,1 @@
-export { ModeToggle } from "./theme-switcher.component";
+export { ModeToggle, ThemeSwitcherMenuItem } from "./theme-switcher.component";

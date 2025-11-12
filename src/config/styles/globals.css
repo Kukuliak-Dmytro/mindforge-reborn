@@ -14,7 +14,7 @@
   --color-foreground: var(--color-foreground);
   --color-primary-text: var(--color-primary-text);
   --color-secondary-text: var(--color-secondary-text);
-
+  --color-border: var(--color-border);
   /* Shadows - defined in variables.css with light/dark variants */
   --shadow-small: var(--shadow-small);
   --shadow-medium: var(--shadow-medium);

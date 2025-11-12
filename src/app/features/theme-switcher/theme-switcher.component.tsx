@@ -12,6 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/app/shared/components/ui/dropdown-menu";
 import { useEffect, useState } from "react";
+import { Icon } from "@iconify/react";
+import { cn } from "@/app/shared/utils/utils";
+import { useTranslations } from "next-intl";
 
 //component
 /**
@@ -84,5 +87,57 @@ export const ModeToggle = () => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+};
+
+//component
+/**
+ * ThemeSwitcherMenuItem component for use in dropdown menus.
+ * Cycles through light -> dark -> light on each click.
+ * Shows the next theme that will be applied, not the current one.
+ */
+export const ThemeSwitcherMenuItem = () => {
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const t = useTranslations("header");
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMounted(true);
+    }, 100);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  const themes = [
+    { value: "light", labelKey: "theme_light", icon: "mdi:weather-sunny" },
+    { value: "dark", labelKey: "theme_dark", icon: "mdi:weather-night" },
+  ];
+
+  // Find current theme index, defaulting to light if theme is system or unknown
+  const currentThemeValue = theme === "system" ? "light" : theme;
+  const currentThemeIndex = themes.findIndex(
+    (t) => t.value === currentThemeValue,
+  );
+  const effectiveIndex = currentThemeIndex >= 0 ? currentThemeIndex : 0;
+
+  // Get the next theme (what will be applied on click)
+  const nextIndex = (effectiveIndex + 1) % themes.length;
+  const nextTheme = themes[nextIndex];
+
+  const cycleTheme = () => {
+    setTheme(nextTheme.value);
+  };
+
+  //return
+  return (
+    <DropdownMenuItem
+      onClick={cycleTheme}
+      className="flex items-center justify-end gap-2 cursor-pointer">
+      {t(nextTheme.labelKey)}
+      <Icon icon={nextTheme.icon} className="size-4" />
+    </DropdownMenuItem>
   );
 };

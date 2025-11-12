@@ -1,81 +1,160 @@
 "use client";
 
-import Image from "next/image";
-
-import { Link } from "@/pkg/libraries/locale";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { usePathname } from "@/pkg/libraries/locale";
+import { routing } from "@/pkg/libraries/locale/routing";
+import { extractPathnameWithoutLocale } from "@/pkg/libraries/role/middleware";
 import { cn } from "@/app/shared/utils/utils";
-//component
-/**
- * HeaderComponent widget.
- */
+import { useAuth } from "@/app/shared/hooks";
+import { signOut } from "@/app/modules/shared/auth/auth.service";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/app/shared/components/ui/dropdown-menu";
+import { LocaleSwitcherMenuItem } from "@/app/features/locale-switcher";
+import { ThemeSwitcherMenuItem } from "@/app/features/theme-switcher";
+import { Logo, MenuTrigger, UserInfo, MenuItemLink } from "./elements";
+import {
+  getTutorMenuItems,
+  getStudentMenuItems,
+  getCommonMenuItems,
+  getAuthMenuItems,
+  getLogoutItem,
+  getSwitchRoleItems,
+} from "./header.constants";
+
+const renderLoggedInMenu = (
+  menuItems: ReturnType<typeof getTutorMenuItems>,
+  commonMenuItems: ReturnType<typeof getCommonMenuItems>,
+  logoutItem: ReturnType<typeof getLogoutItem>,
+  onSignOut: () => void,
+) => (
+  <>
+    {[...menuItems, ...commonMenuItems].map((item) => (
+      <MenuItemLink key={item.href} item={item} />
+    ))}
+    <DropdownMenuSeparator />
+    <ThemeSwitcherMenuItem />
+    <LocaleSwitcherMenuItem />
+    <DropdownMenuSeparator />
+    <MenuItemLink item={logoutItem} variant="destructive" onClick={onSignOut} />
+  </>
+);
+
+const renderLoggedOutMenu = (
+  pathnameWithoutLocale: string,
+  authMenuItems: ReturnType<typeof getAuthMenuItems>,
+  switchRoleItems: ReturnType<typeof getSwitchRoleItems>,
+  t: ReturnType<typeof useTranslations>,
+) => {
+  const isOnHomePage =
+    pathnameWithoutLocale === "/" || pathnameWithoutLocale === "/tutor";
+  const switchRoleItem =
+    pathnameWithoutLocale === "/"
+      ? switchRoleItems.toTutor
+      : switchRoleItems.toStudent;
+
+  return (
+    <>
+      <DropdownMenuLabel className="px-0 text-gray-500 font-normal">
+        {t("not_logged_in")}
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      {isOnHomePage && (
+        <>
+          <MenuItemLink item={switchRoleItem} />
+          <DropdownMenuSeparator />
+        </>
+      )}
+      {authMenuItems.map((item) => (
+        <MenuItemLink key={item.href} item={item} />
+      ))}
+      {!isOnHomePage && <DropdownMenuSeparator />}
+      <ThemeSwitcherMenuItem />
+      <LocaleSwitcherMenuItem />
+    </>
+  );
+};
+
 export const HeaderComponent = () => {
-  //return
+  const t = useTranslations("header");
+  const pathname = usePathname();
+  const { user, isLoggedIn, userRole } = useAuth();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
+
+  const pathnameWithoutLocale = extractPathnameWithoutLocale(
+    pathname,
+    routing.locales,
+  );
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      router.push("/");
+      router.refresh();
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
+  const menuItems =
+    userRole === "TUTOR" ? getTutorMenuItems(t) : getStudentMenuItems(t);
+  const commonMenuItems = getCommonMenuItems(t);
+  const authMenuItems = getAuthMenuItems(t);
+  const logoutItem = getLogoutItem(t);
+  const switchRoleItems = getSwitchRoleItems(t);
+
   return (
     <header
       className={cn(
         "relative z-10 w-full h-[80px] flex justify-center items-center",
-        "bg-gradient-to-b from-background to-foreground shadow-small",
+        "bg-linear-to-b from-background to-foreground shadow-small",
       )}>
       <div className="flex justify-between max-w-[1240px] w-full px-4">
-        {/* Left side */}
-        <div className="flex justify-between items-center gap-4">
-          <Link href="/">
-            <div className="flex items-center gap-0">
-              <Image
-                src="/assets/images/logo.png"
-                alt="MindForge"
-                width={64}
-                height={45}
-                className="w-[64px] h-auto object-contain"
-              />
-              <span className="text-3xl text-secondary font-bold">Mind</span>
-              <span className="text-3xl text-primary font-bold">Forge</span>
-            </div>
-          </Link>
-        </div>
+        <Logo />
 
-        {/* Right side */}
-        <div className="flex justify-between items-center gap-4">
-          {/* Custom Dropdown Menu */}
-          <div className="relative">
-            <button
-              data-menu-button
-              className={cn(
-                "h-10 w-10 p-[12px_8px] rounded-medium bg-primary",
-                "shadow-small flex flex-col justify-between items-center",
-                "cursor-pointer transition-all focus:outline-none",
-              )}
-              aria-label="Toggle menu">
-              <span
-                className={cn(
-                  "block w-6 h-[3px] bg-primary-text rounded-[3px]",
-                  "transition-transform duration-300",
-                )}></span>
-              <span
-                className={cn(
-                  "block w-6 h-[3px] bg-primary-text rounded-[3px]",
-                  "transition-opacity duration-300",
-                )}></span>
-              <span
-                className={cn(
-                  "block w-6 h-[3px] bg-primary-text rounded-[3px]",
-                  "transition-transform duration-300",
-                )}></span>
-            </button>
-
-            <div
-              data-menu-content
-              className={cn(
-                "absolute top-full right-0 mt-2 w-[225px] bg-foreground",
-                "rounded-medium shadow-double p-4 border-none text-right z-50",
-                `origin-top-right transition-all duration-200 ease-out
-                transform`,
-                "scale-95 opacity-0 -translate-y-2 pointer-events-none",
-              )}>
-              {/* Menu content will be added later with logic */}
-            </div>
-          </div>
-        </div>
+        <DropdownMenu open={isMenuOpen} onOpenChange={setIsMenuOpen}>
+          <DropdownMenuTrigger asChild>
+            <MenuTrigger isOpen={isMenuOpen} />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className={cn(
+              "w-[225px] bg-foreground rounded-medium p-4",
+              "text-right border-none shadow-double!",
+            )}>
+            {isLoggedIn && user && userRole ? (
+              <>
+                <UserInfo
+                  firstName={user.firstName}
+                  lastName={user.lastName}
+                  email={user.email}
+                  role={userRole}
+                />
+                <DropdownMenuSeparator />
+                {renderLoggedInMenu(
+                  menuItems,
+                  commonMenuItems,
+                  logoutItem,
+                  handleSignOut,
+                )}
+              </>
+            ) : (
+              renderLoggedOutMenu(
+                pathnameWithoutLocale,
+                authMenuItems,
+                switchRoleItems,
+                t,
+              )
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </header>
   );
