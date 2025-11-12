@@ -12,6 +12,7 @@ import {
   ProfileFormSectionSkeleton,
 } from "./elements/profile-form-section";
 import { EducationSection } from "./elements/education-section";
+import { ExperienceSection } from "./elements/experience-section";
 
 export const TutorProfileModule = () => {
   const {
@@ -50,10 +51,10 @@ export const TutorProfileModule = () => {
         />
         <ProfileFormSection profile={profile} />
       </div>
-      <div>
+      <div className="flex flex-col gap-6">
         <EducationSection education={profile.education} />
+        <ExperienceSection experiences={profile.experiences} />
       </div>
-      {/* <ExperienceSection experiences={profile.experiences} /> */}
     </Section>
   );
 };

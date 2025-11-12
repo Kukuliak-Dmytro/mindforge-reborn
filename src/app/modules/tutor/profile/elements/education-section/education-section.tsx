@@ -184,7 +184,7 @@ export const EducationSection = ({ education }: IEducationSectionProps) => {
   return (
     <>
       <div className="flex items-center justify-between mb-3">
-        <h2>Освіта</h2>
+        <h3>Освіта</h3>
         <div className="flex gap-2">
           <button
             className="p-2 rounded-full bg-primary/10 hover:bg-primary/20

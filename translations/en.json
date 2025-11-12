@@ -228,7 +228,9 @@
       "fieldOfStudy_maxLength": "Field of study cannot exceed 100 characters",
       "degree_required": "Degree is required",
       "degree_maxLength": "Degree cannot exceed 100 characters",
-      "startDate_required": "Start date is required"
+      "startDate_required": "Start date is required",
+      "title_required": "Title is required",
+      "title_maxLength": "Title cannot exceed 100 characters"
     }
   }
 }
