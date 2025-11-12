@@ -211,5 +211,17 @@
     },
     "cta_text": "Допоможи людям кувати знання!",
     "cta_register": "Реєстрація"
+  },
+  "tutor_profile": {
+    "validation": {
+      "firstName_required": "Ім'я є обов'язковим",
+      "firstName_maxLength": "Ім'я не може перевищувати 50 символів",
+      "lastName_required": "Прізвище є обов'язковим",
+      "lastName_maxLength": "Прізвище не може перевищувати 50 символів",
+      "email_required": "Email є обов'язковим",
+      "email_invalid": "Невірний формат email адреси",
+      "phone_invalid": "Невірний формат телефону",
+      "bio_maxLength": "Біографія не може перевищувати 1000 символів"
+    }
   }
 }

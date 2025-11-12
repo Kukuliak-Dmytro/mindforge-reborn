@@ -2,48 +2,68 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { Button } from "./button";
 
-const avatarImages = [
+//constant
+/**
+ * Avatar paths for both display and storage.
+ */
+const AVATAR_PATHS = [
   "/assets/avatars/avatar-img-01.png",
   "/assets/avatars/avatar-img-02.png",
   "/assets/avatars/avatar-img-03.png",
   "/assets/avatars/avatar-img-04.png",
   "/assets/avatars/avatar-img-05.png",
   "/assets/avatars/avatar-img-06.png",
-];
+] as const;
 
+//function
+/**
+ * Maps avatar path to index.
+ */
+const getAvatarIndex = (avatarPath: string | null | undefined): number => {
+  if (!avatarPath) return 0;
+  const index = AVATAR_PATHS.findIndex((path) => path === avatarPath);
+  return index >= 0 ? index : 0;
+};
+
+//interface
+/**
+ * Props for AvatarPicker component.
+ */
 interface AvatarPickerProps {
   currentAvatarUrl?: string | null;
   onSave: (avatarUrl: string) => void;
   onCancel: () => void;
 }
 
+//component
+/**
+ * AvatarPicker component for selecting from predefined avatars.
+ * Uses the same paths for both display and storage (e.g., "/assets/avatars/avatar-img-01.png").
+ */
 export const AvatarPicker: React.FC<AvatarPickerProps> = ({
   currentAvatarUrl,
   onSave,
   onCancel,
 }) => {
-  // Default to first avatar if currentAvatarUrl is not set or not found
-  const initialIndex = currentAvatarUrl
-    ? avatarImages.findIndex((url) => url === currentAvatarUrl)
-    : 0;
   const [selectedIndex, setSelectedIndex] = useState(
-    initialIndex >= 0 ? initialIndex : 0,
+    getAvatarIndex(currentAvatarUrl),
   );
 
+  //return
   return (
     <div className="flex flex-col items-center gap-4">
-      {/* Large preview of the selected avatar, no extra rounding or border */}
+      {/* Large preview of the selected avatar */}
       <div className="mb-2">
         <Image
-          src={avatarImages[selectedIndex]}
-          alt={`Preview Avatar`}
+          src={AVATAR_PATHS[selectedIndex]}
+          alt="Preview Avatar"
           width={140}
           height={140}
         />
       </div>
       {/* Grid of selectable avatars: 3 columns, 2 rows */}
       <div className="grid grid-cols-3 gap-4">
-        {avatarImages.map((url, idx) => (
+        {AVATAR_PATHS.map((url, idx) => (
           <button
             key={url}
             type="button"
@@ -69,7 +89,7 @@ export const AvatarPicker: React.FC<AvatarPickerProps> = ({
       <div className="flex flex-col gap-2 mt-2">
         <Button
           variant="primary"
-          onClick={() => onSave(avatarImages[selectedIndex])}>
+          onClick={() => onSave(AVATAR_PATHS[selectedIndex])}>
           Зберегти
         </Button>
         <Button variant="secondary" onClick={onCancel}>

@@ -22,7 +22,7 @@ export const AuthLayout: FC<Readonly<IProps>> = (props) => {
       <AuthHeaderComponent />
       <div
         className="flex-1 flex items-center justify-center bg-linear-to-br
-          from-background via-foreground to-background">
+          from-background via-foreground to-background px-4 sm:px-6 md:px-8 py-4 sm:py-6 md:py-8">
         {children}
       </div>
     </div>

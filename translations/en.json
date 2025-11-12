@@ -211,5 +211,17 @@
     },
     "cta_text": "Help People Forge Knowledge!",
     "cta_register": "Registration"
+  },
+  "tutor_profile": {
+    "validation": {
+      "firstName_required": "First name is required",
+      "firstName_maxLength": "First name cannot exceed 50 characters",
+      "lastName_required": "Last name is required",
+      "lastName_maxLength": "Last name cannot exceed 50 characters",
+      "email_required": "Email is required",
+      "email_invalid": "Invalid email address format",
+      "phone_invalid": "Invalid phone number format",
+      "bio_maxLength": "Bio cannot exceed 1000 characters"
+    }
   }
 }

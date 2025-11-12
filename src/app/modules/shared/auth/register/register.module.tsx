@@ -57,14 +57,14 @@ export const RegisterModule = () => {
   //return
   return (
     <div
-      className="max-w-xl w-full space-y-8 p-8 bg-foreground rounded-medium
-        shadow-double">
+      className="max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 p-4 sm:p-6 md:p-8 bg-foreground rounded-medium
+        shadow-double mx-auto">
       <div>
         <h2
-          className="mt-6 text-center text-3xl font-extrabold text-primary-text">
+          className="mt-2 sm:mt-4 md:mt-6 text-center text-2xl sm:text-3xl font-extrabold text-primary-text">
           {t("auth_register_title")}
         </h2>
-        <p className="mt-2 text-center text-sm text-secondary-text">
+        <p className="mt-2 text-center text-xs sm:text-sm text-secondary-text">
           {t("auth_or")}{" "}
           <Link
             href="/login"
@@ -74,7 +74,7 @@ export const RegisterModule = () => {
         </p>
       </div>
       <section>
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-8 space-y-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-4 sm:mt-6 md:mt-8 space-y-4 sm:space-y-5 md:space-y-6">
           <Field>
             <FieldLabel htmlFor="firstName">
               {t("auth_register_label_firstName")}
@@ -144,14 +144,14 @@ export const RegisterModule = () => {
 
           {error && (
             <div
-              className="bg-danger/10 border border-danger/20 text-danger px-4
-                py-3 rounded-small">
+              className="bg-danger/10 border border-danger/20 text-danger px-3 sm:px-4
+                py-2 sm:py-3 rounded-small text-sm sm:text-base">
               {error}
             </div>
           )}
 
           <div className="flex justify-center">
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading} className="w-full sm:w-auto">
               {isLoading
                 ? t("auth_register_button_loading")
                 : t("auth_register_button")}

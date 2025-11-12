@@ -12,11 +12,14 @@ export const LayoutModule: FC<Readonly<IProps>> = (props) => {
 
   //return
   return (
-    <div>
+    <div className="flex flex-col items-center justify-center gap-[60px]">
       <HeaderComponent />
-      <main className="flex flex-col items-center justify-center">
+      <main
+        className="flex flex-col items-center justify-center w-full
+          max-w-[1240px]">
         {children}
       </main>
+      <footer></footer>
     </div>
   );
 };

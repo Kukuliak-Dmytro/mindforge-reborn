@@ -8,8 +8,8 @@ interface SectionProps {
 
 export function Section({ title, children, className }: SectionProps) {
   return (
-    <section className="flex flex-col items-center w-full px-4">
-      {title && <h3 className="text-primary-text">{title}</h3>}
+    <section className="flex flex-col items-center w-full">
+      {title && <h3 className="text-primary-text text-left w-full">{title}</h3>}
       <div
         className={cn(
           "w-full max-w-[1240px] p-4 sm:p-6 md:p-8 lg:p-[60px]",
@@ -25,12 +25,8 @@ export function Section({ title, children, className }: SectionProps) {
 
 export function SectionInvisible({ children, className }: SectionProps) {
   return (
-    <section className="flex flex-col items-center w-full px-4">
-      <div
-        className={cn(
-          "w-full max-w-[1240px] p-4 sm:p-6 md:p-8 lg:p-[60px] bg-transparent mt-0",
-          className,
-        )}>
+    <section className="flex flex-col items-center">
+      <div className={cn("w-[1240px] p-[60px] bg-transparent mt-0", className)}>
         {children}
       </div>
     </section>

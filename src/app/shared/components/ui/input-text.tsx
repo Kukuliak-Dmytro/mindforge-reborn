@@ -14,6 +14,7 @@ export interface InputTextProps
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
   readOnly?: boolean;
+  error?: string;
 }
 
 const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
@@ -28,6 +29,7 @@ const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
       className,
       onChange,
       readOnly,
+      error,
       ...props
     },
     ref,
@@ -50,12 +52,20 @@ const InputText = React.forwardRef<HTMLInputElement, InputTextProps>(
             "h-[50px] rounded-medium px-4 text-base",
             readOnly
               ? "cursor-default outline-none border-none"
-              : `border border-primary-border shadow-small focus:outline-none
-                focus:ring-2 focus:ring-accent`,
+              : `border shadow-small focus:outline-none focus:ring-2 ${
+                  error
+                    ? "border-red-500 focus:ring-red-500"
+                    : "border-primary-border focus:ring-accent"
+                }`,
             className,
           )}
           {...props}
         />
+        {error && (
+          <p className="pl-4 text-sm text-red-500" role="alert">
+            {error}
+          </p>
+        )}
       </div>
     );
   },

@@ -43,4 +43,3 @@ export const MenuTrigger = forwardRef<
 });
 
 MenuTrigger.displayName = "MenuTrigger";
-
