@@ -4,8 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { usePathname } from "@/pkg/libraries/locale";
-import { routing } from "@/pkg/libraries/locale/routing";
-import { extractPathnameWithoutLocale } from "@/pkg/libraries/role/middleware";
+import { parsePathname, isHomePage } from "@/app/shared/utils/path.utils";
 import { cn } from "@/app/shared/utils/utils";
 import { useAuth } from "@/app/shared/hooks";
 import { signOut } from "@/app/modules/shared/auth/auth.service";
@@ -47,13 +46,14 @@ const renderLoggedInMenu = (
 );
 
 const renderLoggedOutMenu = (
-  pathnameWithoutLocale: string,
+  pathname: string,
   authMenuItems: ReturnType<typeof getAuthMenuItems>,
   switchRoleItems: ReturnType<typeof getSwitchRoleItems>,
   t: ReturnType<typeof useTranslations>,
 ) => {
-  const isOnHomePage =
-    pathnameWithoutLocale === "/" || pathnameWithoutLocale === "/tutor";
+  const pathnameInfo = parsePathname(pathname);
+  const pathnameWithoutLocale = pathnameInfo.pathnameWithoutLocale;
+  const isOnHomePage = isHomePage(pathname);
   const switchRoleItem =
     pathnameWithoutLocale === "/"
       ? switchRoleItems.toTutor
@@ -87,11 +87,6 @@ export const HeaderComponent = () => {
   const { user, isLoggedIn, userRole } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const router = useRouter();
-
-  const pathnameWithoutLocale = extractPathnameWithoutLocale(
-    pathname,
-    routing.locales,
-  );
 
   const handleSignOut = async () => {
     try {
@@ -146,12 +141,7 @@ export const HeaderComponent = () => {
                 )}
               </>
             ) : (
-              renderLoggedOutMenu(
-                pathnameWithoutLocale,
-                authMenuItems,
-                switchRoleItems,
-                t,
-              )
+              renderLoggedOutMenu(pathname, authMenuItems, switchRoleItems, t)
             )}
           </DropdownMenuContent>
         </DropdownMenu>

@@ -1,6 +1,10 @@
 import type { Locale } from "next-intl";
 import type { UserRole } from "./types";
 import { isStudentOnlyRoute } from "./types";
+import {
+  buildRoleHomePath,
+  extractPathnameWithoutLocale as extractPathnameWithoutLocaleUtil,
+} from "@/app/shared/utils/path.utils";
 
 export interface IRouteAccessResult {
   shouldRedirect: boolean;
@@ -17,31 +21,18 @@ export const isPublicRoute = (path: string): boolean => {
   );
 };
 
+// Re-export for backward compatibility - wraps utility with routing.locales
 export const extractPathnameWithoutLocale = (
   pathname: string,
   locales: readonly Locale[],
 ): string => {
-  for (const locale of locales) {
-    if (pathname.startsWith(`/${locale}/`)) {
-      return pathname.slice(`/${locale}`.length);
-    }
-    if (pathname === `/${locale}`) return "/";
-  }
-  return pathname;
+  return extractPathnameWithoutLocaleUtil(pathname, locales);
 };
 
 export const getUserRole = (session: {
   user: { role?: UserRole };
 }): UserRole => {
   return session.user.role ?? "STUDENT";
-};
-
-const buildLocalePath = (
-  path: string,
-  locale: Locale,
-  defaultLocale: Locale,
-): string => {
-  return locale === defaultLocale ? path : `/${locale}${path}`;
 };
 
 export const checkRouteAccess = (
@@ -54,7 +45,10 @@ export const checkRouteAccess = (
   if (path.startsWith("/tutor") && role !== "TUTOR") {
     return {
       shouldRedirect: true,
-      redirectPath: buildLocalePath("/", currentLocale, defaultLocale),
+      redirectPath: buildRoleHomePath("STUDENT", {
+        locale: currentLocale,
+        defaultLocale,
+      }),
     };
   }
 
@@ -62,7 +56,10 @@ export const checkRouteAccess = (
   if (role === "TUTOR" && (path === "/" || isStudentOnlyRoute(path))) {
     return {
       shouldRedirect: true,
-      redirectPath: buildLocalePath("/tutor", currentLocale, defaultLocale),
+      redirectPath: buildRoleHomePath("TUTOR", {
+        locale: currentLocale,
+        defaultLocale,
+      }),
     };
   }
 

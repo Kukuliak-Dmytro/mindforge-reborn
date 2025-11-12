@@ -1,46 +1,27 @@
 import { NextRequest, NextResponse } from "next/server";
-import { hasLocale } from "next-intl";
 import createMiddleware from "next-intl/middleware";
 import { auth } from "@/pkg/libraries/better-auth";
 import { routing } from "./pkg/libraries/locale";
 import {
-  extractPathnameWithoutLocale,
   getUserRole,
   checkRouteAccess,
   isPublicRoute,
 } from "./pkg/libraries/role";
+import {
+  getLocaleFromRequest,
+  buildLoginPath,
+  buildRoleHomePath,
+  parsePathname,
+} from "@/app/shared/utils/path.utils";
 
 const intlMiddleware = createMiddleware(routing);
 
 export const USER_ID_COOKIE = "user-id";
-const NEXT_LOCALE_COOKIE = "NEXT_LOCALE";
-
-const getLocale = (request: NextRequest): string => {
-  const cookieLocale = request.cookies.get(NEXT_LOCALE_COOKIE)?.value;
-  return cookieLocale && hasLocale(routing.locales, cookieLocale)
-    ? cookieLocale
-    : routing.defaultLocale;
-};
-
-const getLoginPath = (locale: string): string => {
-  return locale === routing.defaultLocale ? "/login" : `/${locale}/login`;
-};
-
-const getDefaultHomePath = (
-  role: string,
-  locale: string,
-  defaultLocale: string,
-): string => {
-  const homePath = role === "TUTOR" ? "/tutor" : "/";
-  return locale === defaultLocale ? homePath : `/${locale}${homePath}`;
-};
 
 export const proxy = async (request: NextRequest) => {
   const pathname = request.nextUrl.pathname;
-  const pathnameWithoutLocale = extractPathnameWithoutLocale(
-    pathname,
-    routing.locales,
-  );
+  const pathnameInfo = parsePathname(pathname);
+  const pathnameWithoutLocale = pathnameInfo.pathnameWithoutLocale;
 
   // Check authentication first (even for public routes)
   const headers = new Headers();
@@ -53,12 +34,11 @@ export const proxy = async (request: NextRequest) => {
     (pathnameWithoutLocale === "/" || pathnameWithoutLocale === "/tutor")
   ) {
     const role = getUserRole(session);
-    const currentLocale = getLocale(request);
-    const defaultHomePath = getDefaultHomePath(
-      role,
-      currentLocale,
-      routing.defaultLocale,
-    );
+    const currentLocale = getLocaleFromRequest(request);
+    const defaultHomePath = buildRoleHomePath(role, {
+      locale: currentLocale,
+      defaultLocale: routing.defaultLocale,
+    });
 
     // Only redirect if they're not already on their default home
     if (pathnameWithoutLocale !== (role === "TUTOR" ? "/tutor" : "/")) {
@@ -72,13 +52,17 @@ export const proxy = async (request: NextRequest) => {
   }
 
   if (!session) {
-    const locale = getLocale(request);
-    return NextResponse.redirect(new URL(getLoginPath(locale), request.url));
+    const locale = getLocaleFromRequest(request);
+    const loginPath = buildLoginPath({
+      locale,
+      defaultLocale: routing.defaultLocale,
+    });
+    return NextResponse.redirect(new URL(loginPath, request.url));
   }
 
   // Check role-based access
   const role = getUserRole(session);
-  const currentLocale = getLocale(request);
+  const currentLocale = getLocaleFromRequest(request);
   const accessCheck = checkRouteAccess(
     pathnameWithoutLocale,
     role,
