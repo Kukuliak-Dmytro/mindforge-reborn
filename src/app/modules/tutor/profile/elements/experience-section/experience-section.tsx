@@ -28,9 +28,7 @@ interface IExperienceSectionProps {
 /**
  * ExperienceSection component for displaying and managing tutor experience entries.
  */
-export const ExperienceSection = ({
-  experiences,
-}: IExperienceSectionProps) => {
+export const ExperienceSection = ({ experiences }: IExperienceSectionProps) => {
   const t = useTranslations();
   const [isAdding, setIsAdding] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -180,7 +178,8 @@ export const ExperienceSection = ({
         <h3>Досвід роботи</h3>
         <div className="flex gap-2">
           <button
-            className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition"
+            className="p-2 rounded-full bg-primary/10 hover:bg-primary/20
+              transition"
             onClick={() => setIsAdding(true)}
             aria-label="Додати досвід"
             type="button">
@@ -200,7 +199,8 @@ export const ExperienceSection = ({
           </button>
         </div>
       </div>
-      <div className="flex flex-col gap-4 transition-all duration-300 ease-in-out">
+      <div
+        className="flex flex-col gap-4 transition-all duration-300 ease-in-out">
         {experiences.map((entry) => (
           <ExperienceCard
             key={entry.id}

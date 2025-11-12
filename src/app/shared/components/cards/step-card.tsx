@@ -12,8 +12,8 @@ export const StepCard: FC<IStepCardProps> = ({ step, title, content }) => {
   return (
     <div
       className={cn(
-        `p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-4 bg-background rounded-medium shadow-double text-left
-        relative`,
+        `p-4 sm:p-6 flex flex-col sm:flex-row gap-3 sm:gap-4 bg-background
+        rounded-medium shadow-double text-left relative`,
       )}>
       <div className="flex-shrink-0">
         <StepIcon step={step} />

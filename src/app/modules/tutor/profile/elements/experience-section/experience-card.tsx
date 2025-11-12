@@ -55,11 +55,17 @@ export const ExperienceCard = ({
   //return
   return (
     <div
-      className={`${baseClasses} ${isEditing ? editingClasses : viewClasses} ${animationClasses}`}>
+      className={`${baseClasses} ${isEditing ? editingClasses : viewClasses}
+        ${animationClasses}`}>
       {isDeleting && (
-        <div className="absolute inset-0 flex items-center justify-center bg-foreground/90 rounded-medium z-10 backdrop-blur-sm">
+        <div
+          className="absolute inset-0 flex items-center justify-center
+            bg-foreground/90 rounded-medium z-10 backdrop-blur-sm">
           <div className="flex items-center gap-2 text-primary">
-            <div className="h-5 w-5 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+            <div
+              className="h-5 w-5 animate-spin rounded-full border-2
+                border-primary border-t-transparent"
+            />
             <span className="text-sm font-medium text-primary-text">
               Видалення...
             </span>
@@ -116,7 +122,9 @@ export const ExperienceCard = ({
         </form>
       ) : (
         <>
-          <div className="flex-1 flex flex-row items-center gap-4 min-w-0 justify-between">
+          <div
+            className="flex-1 flex flex-row items-center gap-4 min-w-0
+              justify-between">
             <div className="flex flex-col min-w-0">
               <span className="truncate text-lg font-medium text-primary-text">
                 {entry.institution}
@@ -125,7 +133,9 @@ export const ExperienceCard = ({
                 {entry.title}
               </span>
             </div>
-            <span className="text-lg font-medium whitespace-nowrap text-primary-text">
+            <span
+              className="text-lg font-medium whitespace-nowrap
+                text-primary-text">
               {new Date(entry.startDate).toLocaleDateString()} -{" "}
               {entry.endDate
                 ? new Date(entry.endDate).toLocaleDateString()
@@ -148,7 +158,10 @@ export const ExperienceCard = ({
               aria-label="Видалити"
               disabled={isPending || isDeleting}>
               {isDeleting ? (
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                <div
+                  className="h-4 w-4 animate-spin rounded-full border-2
+                    border-white border-t-transparent"
+                />
               ) : (
                 <FiTrash2 size={18} />
               )}
@@ -159,4 +172,3 @@ export const ExperienceCard = ({
     </div>
   );
 };
-

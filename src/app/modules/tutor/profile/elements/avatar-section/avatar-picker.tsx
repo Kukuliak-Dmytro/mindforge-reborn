@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { Button } from "@/app/shared/components/ui/button";
 
@@ -29,7 +29,7 @@ const getAvatarIndex = (avatarPath: string | null | undefined): number => {
 /**
  * Props for AvatarPicker component.
  */
-interface AvatarPickerProps {
+interface IAvatarPickerProps {
   currentAvatarUrl?: string | null;
   onSave: (avatarUrl: string) => void;
   onCancel: () => void;
@@ -40,11 +40,11 @@ interface AvatarPickerProps {
  * AvatarPicker component for selecting from predefined avatars.
  * Uses the same paths for both display and storage (e.g., "/assets/avatars/avatar-img-01.png").
  */
-export const AvatarPicker: React.FC<AvatarPickerProps> = ({
+export const AvatarPicker = ({
   currentAvatarUrl,
   onSave,
   onCancel,
-}) => {
+}: IAvatarPickerProps) => {
   const [selectedIndex, setSelectedIndex] = useState(
     getAvatarIndex(currentAvatarUrl),
   );

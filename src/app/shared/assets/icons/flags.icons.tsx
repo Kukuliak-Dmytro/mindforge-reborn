@@ -88,5 +88,3 @@ export const FlagIcon: FC<IFlagIconProps> = ({
       );
   }
 };
-
-
