@@ -55,3 +55,43 @@ export type ITutorProfileFormData = {
   phone?: string;
   bio?: string;
 };
+
+//function
+/**
+ * Creates a Zod schema for tutor education form validation with localized error messages.
+ *
+ * @param t - Translation function from next-intl
+ * @returns Zod schema for tutor education form
+ */
+export const createTutorEducationSchema = (t: TranslationFunction) => {
+  return z.object({
+    institution: z
+      .string()
+      .min(1, t("tutor_profile.validation.institution_required"))
+      .max(100, t("tutor_profile.validation.institution_maxLength")),
+    fieldOfStudy: z
+      .string()
+      .min(1, t("tutor_profile.validation.fieldOfStudy_required"))
+      .max(100, t("tutor_profile.validation.fieldOfStudy_maxLength")),
+    degree: z
+      .string()
+      .min(1, t("tutor_profile.validation.degree_required"))
+      .max(100, t("tutor_profile.validation.degree_maxLength")),
+    startDate: z
+      .string()
+      .min(1, t("tutor_profile.validation.startDate_required")),
+    endDate: z.string().optional(),
+  });
+};
+
+//type
+/**
+ * Type inferred from tutor education schema.
+ */
+export type ITutorEducationFormData = {
+  institution: string;
+  fieldOfStudy: string;
+  degree: string;
+  startDate: string;
+  endDate?: string;
+};

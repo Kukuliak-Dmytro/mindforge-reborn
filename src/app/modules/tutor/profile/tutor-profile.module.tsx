@@ -11,6 +11,7 @@ import {
   ProfileFormSection,
   ProfileFormSectionSkeleton,
 } from "./elements/profile-form-section";
+import { EducationSection } from "./elements/education-section";
 
 export const TutorProfileModule = () => {
   const {
@@ -49,11 +50,9 @@ export const TutorProfileModule = () => {
         />
         <ProfileFormSection profile={profile} />
       </div>
-      {/* <div className="flex gap-[60px]"> */}
-      {/* <AvatarSectionSkeleton />
-        <ProfileFormSectionSkeleton /> */}
-      {/* </div> */}
-      {/* <EducationSection education={profile.education} /> */}
+      <div>
+        <EducationSection education={profile.education} />
+      </div>
       {/* <ExperienceSection experiences={profile.experiences} /> */}
     </Section>
   );

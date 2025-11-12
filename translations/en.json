@@ -221,7 +221,14 @@
       "email_required": "Email is required",
       "email_invalid": "Invalid email address format",
       "phone_invalid": "Invalid phone number format",
-      "bio_maxLength": "Bio cannot exceed 1000 characters"
+      "bio_maxLength": "Bio cannot exceed 1000 characters",
+      "institution_required": "Institution name is required",
+      "institution_maxLength": "Institution name cannot exceed 100 characters",
+      "fieldOfStudy_required": "Field of study is required",
+      "fieldOfStudy_maxLength": "Field of study cannot exceed 100 characters",
+      "degree_required": "Degree is required",
+      "degree_maxLength": "Degree cannot exceed 100 characters",
+      "startDate_required": "Start date is required"
     }
   }
 }
