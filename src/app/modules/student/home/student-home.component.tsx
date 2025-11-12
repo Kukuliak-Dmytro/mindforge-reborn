@@ -31,9 +31,9 @@ export const StudentHomeModule = async () => {
     <div className="min-h-screen">
       {/* Hero Section */}
       <Section>
-        <div className="flex flex-col lg:flex-row items-start relative">
-          <div className="flex flex-col gap-4 lg:max-w-[50%]">
-            <h1>
+        <div className="flex flex-col lg:flex-row items-start relative gap-6 lg:gap-0">
+          <div className="flex flex-col gap-4 lg:max-w-[50%] w-full">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
               <span className="text-secondary">Mind</span>
               <span className="text-primary">Forge</span>
               <br />
@@ -50,23 +50,29 @@ export const StudentHomeModule = async () => {
               ))}
             </div>
 
-            <div className="flex gap-4 justify-between">
-              <Button variant="primary" href="/catalog">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+              <Button
+                variant="primary"
+                href="/catalog"
+                className="w-full sm:w-auto flex-1 sm:flex-none">
                 {t("student_home.hero_find_specialist")}
               </Button>
-              <Button variant="secondary" href="/orders/create">
+              <Button
+                variant="secondary"
+                href="/orders/create"
+                className="w-full sm:w-auto flex-1 sm:flex-none">
                 {t("student_home.hero_place_order")}
               </Button>
             </div>
           </div>
 
-          <div className="hidden lg:block lg:absolute lg:right-0 lg:-top-[60px]">
+          <div className="w-full lg:w-auto lg:absolute lg:right-0 lg:-top-[60px] flex justify-center lg:justify-end">
             <Image
               src="/assets/images/hero-img-student.png"
               alt="Hero image"
               width={500}
               height={600}
-              className="h-auto"
+              className="h-auto w-full max-w-[300px] sm:max-w-[400px] md:max-w-[450px] lg:max-w-[500px]"
             />
           </div>
         </div>
@@ -74,11 +80,13 @@ export const StudentHomeModule = async () => {
 
       {/* Subjects Section */}
       <Section>
-        <div className="flex flex-col gap-12 items-center text-center">
-          <h1>{t("student_home.subjects_title")}</h1>
+        <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 items-center text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("student_home.subjects_title")}
+          </h1>
 
           <div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6
               w-full">
             {subjects.map((subject) => (
               <SubjectCard
@@ -93,7 +101,7 @@ export const StudentHomeModule = async () => {
           <Button
             variant="primary"
             size="large"
-            className="w-[300px]"
+            className="w-full sm:w-[300px]"
             href="/catalog">
             {t("student_home.subjects_go")}
           </Button>
@@ -102,10 +110,12 @@ export const StudentHomeModule = async () => {
 
       {/* How It Works Section */}
       <Section>
-        <div className="flex flex-col gap-12 items-center text-center">
-          <h1>{t("student_home.how_it_works_title")}</h1>
+        <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 items-center text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("student_home.how_it_works_title")}
+          </h1>
 
-          <div className="flex flex-col gap-6 w-full">
+          <div className="flex flex-col gap-4 sm:gap-6 w-full">
             {steps.map((stepData) => (
               <StepCard key={stepData.step} {...stepData} />
             ))}
@@ -115,10 +125,12 @@ export const StudentHomeModule = async () => {
 
       {/* Benefits Section */}
       <Section>
-        <div className="flex flex-col gap-12 items-center text-center">
-          <h1>{t("student_home.benefits_title")}</h1>
+        <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 items-center text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("student_home.benefits_title")}
+          </h1>
 
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 w-full">
             {benefits.map((benefit) => (
               <BenefitCard
                 key={benefit.title}
@@ -132,7 +144,7 @@ export const StudentHomeModule = async () => {
           <Button
             variant="primary"
             size="large"
-            className="w-[500px]"
+            className="w-full sm:w-[400px] md:w-[500px]"
             href="/orders/create">
             {t("student_home.benefits_create_order")}
           </Button>
@@ -141,23 +153,31 @@ export const StudentHomeModule = async () => {
 
       {/* Top Specialists Section */}
       <Section>
-        <div className="flex flex-col gap-12 items-center text-center">
-          <h1>{t("student_home.top_specialists_title")}</h1>
+        <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 items-center text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("student_home.top_specialists_title")}
+          </h1>
 
-          <div className="flex justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 w-full overflow-x-auto sm:overflow-x-visible pb-2 sm:pb-0">
             {topSpecialists.map((specialist) => (
-              <BestEmployeeCard
+              <div
                 key={specialist.name}
-                name={specialist.name}
-                workingSince={specialist.workingSince}
-                rating={specialist.rating}
-                description={specialist.description}
-                avatarId={specialist.avatarId}
-              />
+                className="flex-shrink-0 w-full sm:w-auto sm:flex-1 max-w-[300px] sm:max-w-none mx-auto sm:mx-0">
+                <BestEmployeeCard
+                  name={specialist.name}
+                  workingSince={specialist.workingSince}
+                  rating={specialist.rating}
+                  description={specialist.description}
+                  avatarId={specialist.avatarId}
+                />
+              </div>
             ))}
           </div>
 
-          <Button variant="primary" size="large" className="w-[500px]">
+          <Button
+            variant="primary"
+            size="large"
+            className="w-full sm:w-[400px] md:w-[500px]">
             {t("student_home.top_specialists_catalog")}
           </Button>
         </div>
@@ -165,24 +185,32 @@ export const StudentHomeModule = async () => {
 
       {/* Reviews Section */}
       <Section>
-        <div className="flex flex-col gap-12 items-center text-center">
-          <h1>{t("student_home.reviews_title")}</h1>
+        <div className="flex flex-col gap-6 sm:gap-8 md:gap-12 items-center text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
+            {t("student_home.reviews_title")}
+          </h1>
 
-          <div className="flex justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 w-full overflow-x-auto sm:overflow-x-visible pb-2 sm:pb-0">
             {testimonials.map((testimonial) => (
-              <TestimonialCard
+              <div
                 key={testimonial.name}
-                name={testimonial.name}
-                rating={testimonial.rating}
-                subject={testimonial.subject}
-                description={testimonial.description}
-                author={testimonial.author}
-                avatarId={testimonial.avatarId}
-              />
+                className="flex-shrink-0 w-full sm:w-auto sm:flex-1 max-w-[400px] sm:max-w-none mx-auto sm:mx-0">
+                <TestimonialCard
+                  name={testimonial.name}
+                  rating={testimonial.rating}
+                  subject={testimonial.subject}
+                  description={testimonial.description}
+                  author={testimonial.author}
+                  avatarId={testimonial.avatarId}
+                />
+              </div>
             ))}
           </div>
 
-          <Button variant="primary" size="large" className="w-[350px]">
+          <Button
+            variant="primary"
+            size="large"
+            className="w-full sm:w-[300px] md:w-[350px]">
             {t("student_home.reviews_catalog")}
           </Button>
         </div>
@@ -191,10 +219,16 @@ export const StudentHomeModule = async () => {
       {/* Call to Action Section */}
       <Section>
         <div
-          className="flex flex-col md:flex-row justify-between items-center
-            border-b-2 border-secondary-text py-6">
-          <h2>{t("student_home.cta_text")}</h2>
-          <Button variant="primary" size="large" href="/orders/create">
+          className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6
+            border-b-2 border-secondary-text py-4 sm:py-6">
+          <h2 className="text-xl sm:text-2xl md:text-3xl text-center md:text-left">
+            {t("student_home.cta_text")}
+          </h2>
+          <Button
+            variant="primary"
+            size="large"
+            href="/orders/create"
+            className="w-full md:w-auto">
             {t("student_home.cta_create_order")}
           </Button>
         </div>
