@@ -18,11 +18,17 @@ interface IApiResponse<T> {
 //function
 /**
  * Fetches tutor profile from the API.
+ *
+ * @param headers - Optional headers to include in the request (e.g., cookies for server-side requests)
  */
-export const getTutorProfile = async (): Promise<ITutorProfile> => {
+export const getTutorProfile = async (
+  headers?: HeadersInit,
+): Promise<ITutorProfile> => {
   //return
   const response = await restApiFetcher
-    .get("tutor/profile")
+    .get("tutor/profile", {
+      headers: headers || {},
+    })
     .json<IApiResponse<ITutorProfile>>();
 
   if (!response.success || !response.data) {

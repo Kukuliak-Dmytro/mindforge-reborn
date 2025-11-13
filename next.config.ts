@@ -18,6 +18,7 @@ const withNextIntl = createNextIntlPlugin({
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  cacheComponents: true,
 };
 
 export default withSentryConfig(withNextIntl(nextConfig), {

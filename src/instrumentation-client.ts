@@ -1,22 +1,8 @@
-import * as Sentry from "@sentry/nextjs";
+// This file is intentionally empty.
+// Sentry client initialization has been moved to SentryInitializer component
+// in the IntegrationsProvider to ensure proper initialization order with
+// Next.js 16 Cache Components. The instrumentation-client.ts file is
+// auto-loaded by Next.js, so we keep it empty to avoid crypto.randomUUID()
+// errors during build time.
 
-import { envClient } from "@/config/env";
-
-// init
-if (envClient.NEXT_PUBLIC_SENTRY_DSN) {
-  Sentry.init({
-    dsn: envClient.NEXT_PUBLIC_SENTRY_DSN,
-    integrations: [Sentry.replayIntegration()],
-    tracesSampleRate: 1,
-    enableLogs: true,
-    replaysSessionSampleRate: 0.1,
-    replaysOnErrorSampleRate: 1.0,
-    debug: false,
-  });
-}
-
-//constant
-/**
- * Router transition start handler for Sentry.
- */
-export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
+// Router transition handler can be added to SentryInitializer if needed.

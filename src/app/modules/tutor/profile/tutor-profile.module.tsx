@@ -1,7 +1,8 @@
 "use client";
 
+import { Suspense } from "react";
 import { Section } from "@/app/shared/components/containers/section";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { tutorProfileQueryOptions } from "@/app/entities/api/tutor-profile";
 import {
   AvatarSection,
@@ -14,23 +15,14 @@ import {
 import { EducationSection } from "./elements/education-section";
 import { ExperienceSection } from "./elements/experience-section";
 
-export const TutorProfileModule = () => {
-  const {
-    data: profile,
-    isLoading,
-    isFetching,
-  } = useQuery(tutorProfileQueryOptions());
-
-  if (isLoading) {
-    return (
-      <Section title="Мій профіль">
-        <div className="flex gap-[60px]">
-          <AvatarSectionSkeleton />
-          <ProfileFormSectionSkeleton />
-        </div>
-      </Section>
-    );
-  }
+//component
+/**
+ * Main profile content component that uses Suspense Query.
+ */
+const TutorProfileContent = () => {
+  const { data: profile, isFetching } = useSuspenseQuery(
+    tutorProfileQueryOptions(),
+  );
 
   if (!profile || !profile.user) {
     return (
@@ -56,5 +48,26 @@ export const TutorProfileModule = () => {
         <ExperienceSection experiences={profile.experiences} />
       </div>
     </Section>
+  );
+};
+
+//component
+/**
+ * TutorProfileModule component with Suspense boundaries for streaming.
+ * Uses progressive streaming to render sections as data becomes available.
+ */
+export const TutorProfileModule = () => {
+  return (
+    <Suspense
+      fallback={
+        <Section title="Мій профіль">
+          <div className="flex gap-[60px]">
+            <AvatarSectionSkeleton />
+            <ProfileFormSectionSkeleton />
+          </div>
+        </Section>
+      }>
+      <TutorProfileContent />
+    </Suspense>
   );
 };

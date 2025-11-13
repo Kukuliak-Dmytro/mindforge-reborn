@@ -1,3 +1,4 @@
+"use cache";
 import { Locale, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";

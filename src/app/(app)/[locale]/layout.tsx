@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { Locale, NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, Suspense } from "react";
 
 import "@/config/styles/globals.css";
 import { ScanComponent } from "@/pkg/libraries/scan/scan.component";
@@ -71,7 +71,9 @@ export const RootLayout: FC<Readonly<IProps>> = async (props) => {
       className={`${comfortaa.variable} ${quicksand.variable}`}>
       <ScanComponent isDev={envServer.NODE_ENV !== "production"} />
       <body className={`antialiased ${comfortaa.className}`}>
-        <IntegrationsProvider />
+        <Suspense fallback={null}>
+          <IntegrationsProvider />
+        </Suspense>
         <RestApiProvider>
           <UiProvider>
             <NextIntlClientProvider>{children}</NextIntlClientProvider>
